@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AiNoteX Pro</title>
     <meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="./favicon.png" type="image/png">
 
 <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
 
@@ -23,14 +24,20 @@
 
     <style>
 
-/* Ai NoteX Pro Beta Test v1.0  */
-/* Ai NoteX Pro 2025.10.09 PWA ~ Ai Note로 개발 시작하여 2026.10~11월경에  명칭 Ai NoteX Pro 확정 */
+/* Ai NoteX Pro 개발 이력 */
+/* Ai NoteX Pro 2025.10.09 PWA ~ Ai Note로 개발 시작하여 2026.10~11월초에  명칭 Ai NoteX Pro 확정 */
+/* Ai NoteX Pro 2026.01.06 GitHub 가입 & Ai NoteX Pro Beta Test v1.0 등록 */
 /* Ai NoteX Pro 2026.01.13 한국저작권위원 저작권 등록 접수 완료 */
 /* Ai NoteX Pro 2026.01.15 메모 검색어 찾기 업데이드 완료 */
 /* Ai NoteX Pro 2026.01.17 버그 수정 작업 중*/
-/* Ai NoteX Pro 2026.01.21 KR / EN 버튼과 영문 버전 작업 완료 */
 /* Ai NoteX Pro 2026.01.13 한국저작권위원 저작권 등록 접수 */
-/* Ai NoteX Pro 2026.01.22 한국저작권위원 저작권 수정 보완 접수 */
+/* Ai NoteX Pro 2026.01.14 특허청 Ai NoteX Pro 상표권 2개 등록 접수 */
+/* Ai NoteX Pro 2026.01.21 main.html - KR / EN 버튼과 mainen.html 영문 버전 작업 완료 */
+/* Ai NoteX Pro 2026.01.22 한국저작권위원 저작권 수정 보완 1차 접수 */
+/* Ai NoteX Pro 2026.01.29 한국저작권위원 저작권 수정 보완 2차 접수 */
+/* Ai NoteX Pro 2026.01.29 Ai NoteX Pro Beta Test v2.0 최종 수정 */
+/* Ai NoteX Pro 2026.01.29 GitHub - Ai NoteX Pro Beta Test v1.0 첫 저장소 폴더 오류로 저장소 전체 삭제 재 업로드 */
+/* Ai NoteX Pro 2026.01.29 GitHub - Ai NoteX Pro Beta Test v2.0 등록 */
 
 /* Ai NoteX Pro 2026.00.00 한국저작권위원 저작권 업데이트 변경 등록 신청 준비 */
 
@@ -351,17 +358,19 @@
     <span style="color: #5f6368; font-size: 14px;">➔</span>
 </a>
 
-<a href="https://drawings.google.com/create" target="_blank" 
-   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
-   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
-   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+<a href="canvas.html" target="_blank" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.08)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 38px; margin: 13px auto; padding: 0 25px; background-color: #ffffff; border: none; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 900; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.08); cursor: pointer; box-sizing: border-box;">
     
-    <img src="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_drawing_x64.png" 
-         alt="Drawing" style="width: 18px; height: 18px; margin-right: 12px; vertical-align: middle;">
-
-    <span style="flex-grow: 1; text-align: left;">Google 드로잉 바로가기</span>
+    <span style="margin-right: 12px; font-size: 18px; display: flex; align-items: center;">🖼️</span>
+    <span style="flex-grow: 1; text-align: left;">CANVAS STATION </span>        
     <span style="color: #5f6368; font-size: 14px;">➔</span>
+      
 </a>
+
+
+
 
 <div style="text-align: center;">
     <a href="javascript:void(0);" 
@@ -413,6 +422,7 @@
     <div class="box">
         <select id="noteCategory">
      <option value="">카테고리 선택</option>
+	<option value="canvas">00 - canvas</option>
       <option value="문자 보내기">00 - 문자 보내기</option>
       <option value="일상.쇼핑">01 - 일상 . 쇼핑</option>
       <option value="의약.식품">02 - 의약 . 식품</option>
@@ -479,6 +489,7 @@ function sendSMS() {
                 <button onclick="loadAndShow('all')" style="padding:5px 10px; border-radius:5px; border:1px solid #007bff; background:#fff; color:#007bff; cursor:pointer;">카테고리 전체 목록</button>
                 <select id="filterSelector" onchange="loadAndShow(this.value)" style="width:120px; margin:0; padding:5px; font-size:14px;">
                     <option value="all">항목 선택 보기</option>
+       <option value="canvas">00 - canvas</option>
       <option value="문자 보내기">00 - 문자 보내기</option>
       <option value="일상.쇼핑">01 - 일상 . 쇼핑</option>
       <option value="의약.식품">02 - 의약 . 식품</option>
@@ -725,7 +736,7 @@ function changeLang(lang) {
 </div>
 
 <footer style="background: linear-gradient(to bottom, #ffffff, #a8ff78); padding: 40px 20px; text-align: center; font-family: 'Noto Sans KR', sans-serif;">
-    <div style="color: #666; font-size: 12px; line-height: 1.8; margin-bottom: 30px;">
+    <div style="color: #666; font-size: 10px; line-height: 1.8; margin-bottom: 30px;">
         <strong style="color: #333;">Ai NoteX Pro</strong> | 대표자:나무한그루 | 주소: 강원도 인제군 기린면 <br>
         사업자등록번호: 000-00-00000 | 통신판매업신고: 제0000-강원-0000<br>
         이메일: ainotexpro@gmail.com | 전화: 000-0000-0000 유튜브 : https://www.youtube.com/@ainotexpro 
@@ -756,11 +767,11 @@ function changeLang(lang) {
 
     <div style="font-size: 14px; margin-bottom: 15px;">
         <a href="terms.html" style="text-decoration: none; color: #2d5a27;">이용약관</a>
-        <span style="color: #2d5a27; margin: 0 10px;">|</span>
+        <span style="color: #2d5a27; margin: 0 7px;">|</span>
         <a href="privacy.html" style="text-decoration: none; color: #2d5a27; font-weight: 900;">개인정보처리방침</a>
-        <span style="color: #2d5a27; margin: 0 10px;">|</span>
+        <span style="color: #2d5a27; margin: 0 7px;">|</span>
         <a href="support.html" style="text-decoration: none; color: #2d5a27;">고객센터</a>
-        <span style="color: #2d5a27; margin: 0 10px;">|</span>
+        <span style="color: #2d5a27; margin: 0 7px;">|</span>
         <a href="payment.html" style="text-decoration: none; color: #2d5a27;">결제안내</a>
     </div>
 <p style="font-size: 0.8rem; color: #888;">
