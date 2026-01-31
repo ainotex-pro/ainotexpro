@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AiNoteX Pro - Global Master</title>
-    <meta name="google" content="notranslate">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    
+    <style>
+        body { margin: 0; padding: 10px; background: linear-gradient(180deg, #fefb94 0%, #a1ffce 100%); font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .header-bar { background: white; border: 3px solid #4285F4; padding: 5px 30px; border-radius: 50px; margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 18px; font-weight: bold; color: #4285F4; }
+        .control-panel { background: #8cabd1; padding: 8px; border-radius: 12px; width: 100%; max-width: 450px; border: 3px solid #1a3a5f; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 4px; box-sizing: border-box; }
+        .row { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; }
+        
+        /* 기본 버튼 스타일 - 사장님 성공 수치 적용 */
+        button { 
+            flex: 1; min-width: 45px; height: 22px !important; padding: 0 !important; 
+            line-height: 22px !important; font-size: 10px !important; border: none; 
+            border-radius: 4px; background: white; font-weight: bold; cursor: pointer; 
+            box-shadow: 0 1.5px 0 #bdc3c7; transition: 0.1s; display: flex; align-items: center; justify-content: center;
+        }
+        button:active { transform: translateY(1px); box-shadow: none; }
+        .btn-select { background: #ffeb3b !important; }
+        .btn-draw { background: #4285f4 !important; color: white !important; }
+        .btn-text { background: #fffacd !important; }
+        .btn-delete { background: #ea4335 !important; color: white !important; }
+        .btn-save { background: #34a853 !important; color: white !important; }
+        .btn-share { background: #28a745 !important; color: white !important; }
+        select { flex: 2; height: 22px; padding: 0 5px; border-radius: 5px; border: 2px solid #1a3a5f; font-size: 10px; font-weight: bold; }
+        .canvas-container-box { border: 5px solid #4285F4; border-radius: 12px; background: white; width: 100%; max-width: 1000px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+    </style>
     <style>
         body { margin: 0; padding: 15px; background: linear-gradient(180deg, #fefb94 0%, #a1ffce 100%); font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .header-bar { background: white; border: 3px solid #4285F4; padding: 10px 40px; border-radius: 50px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 20px; font-weight: bold; color: #4285F4; }
         
-        .lang-control { margin-bottom: 15px; background: rgba(255, 255, 255, 0.5); padding: 5px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; border: 1px solid #1a3a5f; }
+        .lang-control { margin-bottom: 15px; background: rgba(255, 255, 255, 0.5); padding: 5px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; border: 1px solid #1a3a5f; }
         .lang-btn { background: none !important; border: none !important; box-shadow: none !important; font-weight: bold; cursor: pointer; color: #1a3a5f; font-size: 14px; padding: 5px !important; min-width: auto !important; }
         .lang-btn.active { color: #4285f4; text-decoration: underline; font-size: 16px; }
+        .lang-divider { color: #ccc; }
 
-        /* [수정 완료] 영문판처럼 시원하게 벌어진 패널 디자인 */
-        .control-panel { 
-            background: #8cabd1; padding: 15px; border-radius: 15px; width: 100%; max-width: 450px; 
-            border: 3px solid #1a3a5f; margin-bottom: 30px; /* 30px로 넉넉히 벌림 */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; 
-        }
-
+        .control-panel { background: #8cabd1; padding: 15px; border-radius: 15px; width: 100%; max-width: 450px; border: 3px solid #1a3a5f; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; }
         .row { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; }
         button { flex: 1; min-width: 80px; padding: 12px 5px; border: none; border-radius: 8px; background: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #bdc3c7; font-size: 13px; transition: 0.1s; }
         button:active { transform: translateY(2px); box-shadow: none; }
@@ -32,12 +48,7 @@
         .btn-delete { background: #ea4335 !important; color: white !important; }
         .btn-save { background: #34a853 !important; color: white !important; }
         select { flex: 2; padding: 10px; border-radius: 8px; border: 2px solid #1a3a5f; font-weight: bold; }
-
-        /* [수정 완료] 입체감 넘치는 캔버스 박스 */
-        .canvas-container-box { 
-            border: 5px solid #4285F4; border-radius: 12px; background: white; width: 100%; max-width: 450px; 
-            overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-        }
+        .canvas-container-box { border: 5px solid #4285F4; border-radius: 12px; background: white; width: 100%; max-width: 1000px; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -45,65 +56,170 @@
 <div class="header-bar">💎 CANVAS STATION 💎</div>
 
 <div class="lang-control">
-    <button id="btn-kr" class="lang-btn active" onclick="changeLang('KR')">KR</button>
-    <span style="color:#ccc">/</span>
-    <button id="btn-en" class="lang-btn" onclick="changeLang('EN')">EN</button>
+    <button id="btn-kr" class="lang-btn" onclick="changeLang('KR')">KR</button>
+    <span class="lang-divider">/</span>
+    <button id="btn-en" class="lang-btn active" onclick="changeLang('EN')">EN</button>
 </div>
 
-<div id="sub-title" style="margin-bottom: 15px; font-size: 11px; font-weight: bold; color: #1a3a5f; letter-spacing: 1.5px; opacity: 0.8; text-align: center;">
-    [ CANVAS STATION - AI NOTEX PRO & GOOGLE GEMINI ]
+<div id="sub-title" style="margin-bottom: 15px; font-size: 11px; font-weight: bold; color: #1a3a5f; letter-spacing: 1.5px; opacity: 0.8;">
+     [ CANVAS STATION - AI NOTEX PRO & GOOGLE GEMINI ]
 </div>
-
 <div class="control-panel">
-    <div class="row" style="background: rgba(255,255,255,0.4); padding: 8px; border-radius: 10px;">
-        <select id="save-list"><option value="">📂 저장된 목록 보기</option></select>
-        <button id="btn-load" class="btn-draw" style="min-width: 60px;" onclick="loadFromList()">불러오기</button>
+    <div class="row" style="background: rgba(255,255,255,0.4); padding: 4px; border-radius: 8px;">
+        <select id="save-list"><option value="">📂 저장 목록</option></select>
+        <button id="btn-load" class="btn-draw" onclick="loadFromList()">불러오기</button>
     </div>
     
     <div class="row">
-        <button id="btn-select" class="btn-select" onclick="setMode('select')">🖱️ 선택/이동</button>
-        <button id="btn-draw" class="btn-draw" onclick="setMode('draw')">✏️ 자유그리기</button>
-        <button id="btn-addtext" class="btn-text" onclick="addObj('text')">✍️ TEXT 입력</button>
+        <button id="btn-select" class="btn-select" onclick="setMode('select')">🖱️ 선택</button>
+        <button id="btn-draw" class="btn-draw" onclick="setMode('draw')">✏️ 그리기</button>
+        <button id="btn-addtext" class="btn-text" onclick="addObj('text')">✍️ TEXT</button>
     </div>
 
     <div class="row">
-        <button id="btn-delobj" class="btn-delete" onclick="deleteObj()">🗑️ 선택 삭제</button>
-        <button id="btn-clear" class="btn-delete" onclick="clearAll()">🚀 전체 비우기</button>
-        <button id="btn-save" class="btn-save" onclick="saveWithTitle()">💾 제목으로 저장</button>
+        <button id="btn-delobj" class="btn-delete" onclick="deleteObj()">🗑️ 삭제</button>
+        <button id="btn-clear" class="btn-delete" onclick="clearAll()">🚀 비우기</button>
+        <button class="btn-share" onclick="shareCanvas()">📤 전송</button>
+        <button id="btn-save" class="btn-save" onclick="saveWithTitle()">💾 저장</button>
+    </div>
+
+    <div class="row" style="font-size: 12px; font-weight: bold; color: white;">
+        🎨  COLOR CODE:<input type="color" id="cp" value="#1a73e8" onchange="updateBrush()" style="width:30px; height:20px; border:none; padding:0;">
+        📏 SIZE<input type="number" id="sp" value="50" style="width:50px; height:17px; font-size:12px;">
     </div>
 
     <div class="row">
-        <span class="label" id="lbl-color">🎨 색상:</span><input type="color" id="cp" value="#1a73e8" onchange="updateBrush()">
-        <span class="label" id="lbl-size">📏 크기:</span><input type="number" id="sp" value="80">
-    </div>
-
-    <div class="row">
-        <button onclick="addObj('rect')" id="btn-rect">⬜ 사각</button>
-        <button onclick="addObj('circle')" id="btn-circle">⚪ 원형</button>
-        <button onclick="addObj('ring')" id="btn-ring">⭕ 링</button>
+        <button onclick="addObj('rect')">⬜ 사각</button>
+        <button onclick="addObj('circle')">⚪ 원형</button>
+        <button onclick="addObj('ring')">⭕ 링</button>
+        <button onclick="addObj('star')">⭐ 별</button>
     </div>
     <div class="row">
-        <button onclick="addObj('star')" id="btn-star">⭐ 별</button>
-        <button onclick="addObj('heart')" id="btn-heart">❤️ 하트</button>
-        <button onclick="addObj('window')" id="btn-window">🪟 창문</button>
+        <button onclick="addObj('heart')">❤️ 하트</button>
+        <button onclick="addObj('window')">🪟 창문</button>
+        <button onclick="addObj('cloud')">☁️ 구름</button>
+        <button onclick="addObj('chat')">💬 말풍선</button>
     </div>
     <div class="row">
-        <button onclick="addObj('cloud')" id="btn-cloud">☁️ 구름</button>
-        <button onclick="addObj('chat')" id="btn-chat">💬 말풍선</button>
-        <button onclick="addObj('arrow')" id="btn-arrow">↗️ 화살표</button>
-    </div>
-    <div class="row">
-        <button onclick="addObj('door')" id="btn-door">🚪 방문</button>
-        <button id="btn-dellist" class="btn-delete" onclick="deleteFromList()" style="flex:2;">🗑️ 목록에서 영구 삭제</button>
+        <button onclick="addObj('arrow')">↗️ 화살표</button>
+        <button onclick="addObj('door')">🚪 방문</button>
+        <button id="btn-dellist" class="btn-delete" onclick="deleteFromList()" style="flex:2;">🗑️ 목록 영구 삭제</button>
     </div>
 </div>
 
-<div class="canvas-container-box"><canvas id="c" width="450" height="600"></canvas></div>
+<div class="canvas-container-box"><canvas id="c" width="1000" height="530"></canvas></div>
 
+<script>
+// [index.html 전용 언어 전환 스위치]
+function changeLang(lang) {
+    if (lang === 'KR') {
+        // 이미 한글판이니 새로고침만 하거나 canvas.html로 이동
+        location.href = 'canvas.html'; 
+    } else {
+        // 영어 버튼을 누르면 영문판(canvasen.html)으로 정밀 도약!
+        location.href = 'canvasen.html';
+    }
+}
+
+    var canvas = new fabric.Canvas('c');
+    canvas.backgroundColor = '#ffffff';
+
+    window.onload = function() { updateSaveList(); };
+
+    function setMode(mode) {
+        canvas.isDrawingMode = (mode === 'draw');
+        if(canvas.isDrawingMode) {
+            canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+            canvas.freeDrawingBrush.width = 5;
+            canvas.freeDrawingBrush.color = document.getElementById('cp').value;
+        }
+    }
+    function updateBrush() { if(canvas.isDrawingMode) canvas.freeDrawingBrush.color = document.getElementById('cp').value; }
+    
+    function saveWithTitle() {
+        const title = prompt("저장할 제목:");
+        if (!title) return;
+        const canvasData = JSON.stringify(canvas.toJSON());
+        let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
+        allSaves[title] = canvasData;
+        localStorage.setItem('AiNoteX_Saves_All', JSON.stringify(allSaves));
+        updateSaveList();
+    }
+
+    function updateSaveList() {
+        const select = document.getElementById('save-list');
+        const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
+        select.innerHTML = `<option value="">📂 저장 목록</option>`;
+        for (let title in allSaves) {
+            let opt = document.createElement('option');
+            opt.value = title; opt.innerHTML = title;
+            select.appendChild(opt);
+        }
+    }
+
+    function loadFromList() {
+        const title = document.getElementById('save-list').value;
+        if (!title) return;
+        const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
+        canvas.loadFromJSON(allSaves[title], function() { canvas.renderAll(); });
+    }
+
+    function deleteFromList() {
+        const title = document.getElementById('save-list').value;
+        if (!title || !confirm("영구 삭제하시겠습니까?")) return;
+        let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
+        delete allSaves[title];
+        localStorage.setItem('AiNoteX_Saves_All', JSON.stringify(allSaves));
+        updateSaveList();
+        canvas.clear(); canvas.backgroundColor='#ffffff';
+    }
+
+    function addObj(type) {
+        setMode('select');
+        const color = document.getElementById('cp').value;
+        const size = parseInt(document.getElementById('sp').value) || 80;
+        let obj; const opt = { left: 100, top: 100, fill: color, stroke: '#000', strokeWidth: 2 };
+        if(type === 'rect') obj = new fabric.Rect({ ...opt, width: size, height: size });
+        if(type === 'circle') obj = new fabric.Circle({ ...opt, radius: size/2 });
+        if(type === 'ring') obj = new fabric.Circle({ ...opt, radius: size/2, fill: '', stroke: color, strokeWidth: size/5 });
+        if(type === 'star') obj = new fabric.Polygon([{x:0,y:-40},{x:10,y:-10},{x:40,y:-10},{x:15,y:10},{x:25,y:40},{x:0,y:20},{x:-25,y:40},{x:-15,y:10},{x:-40,y:-10},{x:-10,y:-10}], { ...opt, scaleX: size/50, scaleY: size/50 });
+        if(type === 'heart') obj = new fabric.Path('M 272 238 C 206 238 152 292 152 358 C 152 493 288 528 381 662 C 468 529 609 489 609 358 C 609 292 556 238 489 238 C 441 238 400 267 381 307 C 362 267 320 238 272 238 z', { ...opt, scaleX: size/500, scaleY: size/500 });
+        if(type === 'cloud') obj = new fabric.Path('M 25 10 C 15 10 10 20 15 30 C 5 35 10 45 20 45 C 20 55 35 55 40 45 C 50 45 55 35 45 30 C 50 20 40 10 25 10 Z', { ...opt, scaleX: size/30, scaleY: size/30 });
+        if(type === 'chat') obj = new fabric.Path('M 10 10 H 90 V 70 H 40 L 20 90 V 70 H 10 Z', { ...opt, scaleX: size/50, scaleY: size/50 });
+        if(type === 'arrow') obj = new fabric.Path('M 0 0 L 20 0 L 20 -10 L 40 10 L 20 30 L 20 20 L 0 20 Z', { ...opt, scaleX: size/40, scaleY: size/40 });
+        if(type === 'text') obj = new fabric.IText('Input', { left: 100, top: 100, fill: color, fontSize: 30 });
+        if(type === 'window') obj = new fabric.Group([new fabric.Rect({width:100,height:20,fill:'#fff',stroke:'#000',strokeWidth:2}),new fabric.Line([0,10,100,10],{stroke:'#000',strokeWidth:1})], {left:100,top:100});
+        if(type === 'door') obj = new fabric.Group([new fabric.Rect({width:5,height:60,fill:'#000'}),new fabric.Path('M 0 60 Q 60 60 60 0',{fill:'',stroke:'#000',strokeWidth:2,strokeDashArray:[5,5]})], {left:100,top:100});
+        if(obj) { canvas.add(obj); canvas.setActiveObject(obj); canvas.renderAll(); }
+    }
+    function deleteObj() { const active = canvas.getActiveObject(); if(active) { canvas.remove(active); canvas.renderAll(); } }
+    function clearAll() { if(confirm("모두 비울까요?")) { canvas.clear(); canvas.backgroundColor = '#ffffff'; } }
+
+    async function shareCanvas() {
+        const dataUrl = canvas.toDataURL({ format: 'png', quality: 1 });
+        if (navigator.share) {
+            try {
+                const res = await fetch(dataUrl);
+                const blob = await res.blob();
+                const file = new File([blob], "AiNoteX_Art.png", { type: "image/png" });
+                await navigator.share({ files: [file], title: 'AiNoteX 작품', text: '내가 그린 그림입니다! 🌳' });
+            } catch (err) { console.log("공유 취소"); }
+        } else {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'AiNoteX_Art.png';
+            link.click();
+            alert("PC에 그림이 저장되었습니다!");
+        }
+    }
+
+
+</script>
+</body>
 <div style="text-align: center; margin-top: 25px; padding: 0 10px; line-height: 1.4;">
     
     <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
-    <div style="font-size: 0.7rem; color: #999; letter-spacing: 1px;">
+    <div style="font-size: 0.75rem; color: #999; letter-spacing: 1px;">
         [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
     </div>
 
@@ -127,114 +243,4 @@
     <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
 </div>
 
-
-<script>
-    var canvas = new fabric.Canvas('c');
-    canvas.backgroundColor = '#ffffff';
-    var currentLang = 'KR';
-
-    window.onload = function() { updateSaveList(); };
-
-    function changeLang(lang) {
-        currentLang = lang;
-        document.getElementById('btn-kr').classList.toggle('active', lang === 'KR');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'EN');
-
-        const isKR = (lang === 'KR');
-        document.getElementById('btn-load').innerText = isKR ? '불러오기' : 'LOAD';
-        document.getElementById('btn-select').innerText = isKR ? '🖱️ 선택/이동' : '🖱️ SELECT';
-        document.getElementById('btn-draw').innerText = isKR ? '✏️ 자유그리기' : '✏️ DRAW';
-        document.getElementById('btn-addtext').innerText = isKR ? '✍️ TEXT 입력' : '✍️ TEXT';
-        document.getElementById('btn-delobj').innerText = isKR ? '🗑️ 선택 삭제' : '🗑️ DELETE';
-        document.getElementById('btn-clear').innerText = isKR ? '🚀 전체 비우기' : '🚀 CLEAR ALL';
-        document.getElementById('btn-save').innerText = isKR ? '💾 제목으로 저장' : '💾 SAVE AS';
-        document.getElementById('lbl-color').innerText = isKR ? '🎨 색상:' : '🎨 COLOR:';
-        document.getElementById('lbl-size').innerText = isKR ? '📏 크기:' : '📏 SIZE:';
-        document.getElementById('btn-rect').innerText = isKR ? '⬜ 사각' : '⬜ RECT';
-        document.getElementById('btn-circle').innerText = isKR ? '⚪ 원형' : '⚪ CIRCLE';
-        document.getElementById('btn-ring').innerText = isKR ? '⭕ 링' : '⭕ RING';
-        document.getElementById('btn-star').innerText = isKR ? '⭐ 별' : '⭐ STAR';
-        document.getElementById('btn-heart').innerText = isKR ? '❤️ 하트' : '❤️ HEART';
-        document.getElementById('btn-window').innerText = isKR ? '🪟 창문' : '🪟 WINDOW';
-        document.getElementById('btn-cloud').innerText = isKR ? '☁️ 구름' : '☁️ CLOUD';
-        document.getElementById('btn-chat').innerText = isKR ? '💬 말풍선' : '💬 CHAT';
-        document.getElementById('btn-arrow').innerText = isKR ? '↗️ 화살표' : '↗️ ARROW';
-        document.getElementById('btn-door').innerText = isKR ? '🚪 방문' : '🚪 DOOR';
-        document.getElementById('btn-dellist').innerText = isKR ? '🗑️ 목록에서 영구 삭제' : '🗑️ DELETE LIST';
-        
-        updateSaveList();
-    }
-
-    function setMode(mode) {
-        canvas.isDrawingMode = (mode === 'draw');
-        if(canvas.isDrawingMode) {
-            canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-            canvas.freeDrawingBrush.width = 5;
-            canvas.freeDrawingBrush.color = document.getElementById('cp').value;
-        }
-    }
-    function updateBrush() { if(canvas.isDrawingMode) canvas.freeDrawingBrush.color = document.getElementById('cp').value; }
-    
-    function saveWithTitle() {
-        const title = prompt(currentLang === 'KR' ? "저장할 제목:" : "Enter Title:");
-        if (!title) return;
-        const canvasData = JSON.stringify(canvas.toJSON());
-        let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
-        allSaves[title] = canvasData;
-        localStorage.setItem('AiNoteX_Saves_All', JSON.stringify(allSaves));
-        updateSaveList();
-    }
-
-    function updateSaveList() {
-        const select = document.getElementById('save-list');
-        const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
-        select.innerHTML = `<option value="">${currentLang === 'KR' ? '📂 저장 목록' : '📂 Saved List'}</option>`;
-        for (let title in allSaves) {
-            let opt = document.createElement('option');
-            opt.value = title; opt.innerHTML = title;
-            select.appendChild(opt);
-        }
-    }
-
-    function loadFromList() {
-        const title = document.getElementById('save-list').value;
-        if (!title) return;
-        const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
-        canvas.loadFromJSON(allSaves[title], function() { canvas.renderAll(); });
-    }
-
-    function deleteFromList() {
-        const title = document.getElementById('save-list').value;
-        if (!title || !confirm(currentLang === 'KR' ? "영구 삭제하시겠습니까?" : "Delete permanently?")) return;
-        let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
-        delete allSaves[title];
-        localStorage.setItem('AiNoteX_Saves_All', JSON.stringify(allSaves));
-        updateSaveList();
-        canvas.clear(); canvas.backgroundColor='#ffffff';
-    }
-
-    function addObj(type) {
-        setMode('select');
-        const color = document.getElementById('cp').value;
-        const size = parseInt(document.getElementById('sp').value) || 80;
-        let obj; const opt = { left: 100, top: 100, fill: color, stroke: '#000', strokeWidth: 2 };
-        if(type === 'rect') obj = new fabric.Rect({ ...opt, width: size, height: size });
-        if(type === 'circle') obj = new fabric.Circle({ ...opt, radius: size/2 });
-        if(type === 'ring') obj = new fabric.Circle({ ...opt, radius: size/2, fill: '', stroke: color, strokeWidth: size/5 });
-        if(type === 'star') obj = new fabric.Polygon([{x:0,y:-40},{x:10,y:-10},{x:40,y:-10},{x:15,y:10},{x:25,y:40},{x:0,y:20},{x:-25,y:40},{x:-15,y:10},{x:-40,y:-10},{x:-10,y:-10}], { ...opt, scaleX: size/50, scaleY: size/50 });
-        if(type === 'heart') obj = new fabric.Path('M 272 238 C 206 238 152 292 152 358 C 152 493 288 528 381 662 C 468 529 609 489 609 358 C 609 292 556 238 489 238 C 441 238 400 267 381 307 C 362 267 320 238 272 238 z', { ...opt, scaleX: size/500, scaleY: size/500 });
-        if(type === 'cloud') obj = new fabric.Path('M 25 10 C 15 10 10 20 15 30 C 5 35 10 45 20 45 C 20 55 35 55 40 45 C 50 45 55 35 45 30 C 50 20 40 10 25 10 Z', { ...opt, scaleX: size/30, scaleY: size/30 });
-        if(type === 'chat') obj = new fabric.Path('M 10 10 H 90 V 70 H 40 L 20 90 V 70 H 10 Z', { ...opt, scaleX: size/50, scaleY: size/50 });
-        if(type === 'arrow') obj = new fabric.Path('M 0 0 L 20 0 L 20 -10 L 40 10 L 20 30 L 20 20 L 0 20 Z', { ...opt, scaleX: size/40, scaleY: size/40 });
-        if(type === 'text') obj = new fabric.IText(currentLang === 'KR' ? '입력' : 'Input', { left: 100, top: 100, fill: color, fontSize: 30 });
-        if(type === 'window') obj = new fabric.Group([new fabric.Rect({width:100,height:20,fill:'#fff',stroke:'#000',strokeWidth:2}),new fabric.Line([0,10,100,10],{stroke:'#000',strokeWidth:1})], {left:100,top:100});
-        if(type === 'door') obj = new fabric.Group([new fabric.Rect({width:5,height:60,fill:'#000'}),new fabric.Path('M 0 60 Q 60 60 60 0',{fill:'',stroke:'#000',strokeWidth:2,strokeDashArray:[5,5]})], {left:100,top:100});
-        if(obj) { canvas.add(obj); canvas.setActiveObject(obj); canvas.renderAll(); }
-    }
-    function deleteObj() { const active = canvas.getActiveObject(); if(active) { canvas.remove(active); canvas.renderAll(); } }
-    function clearAll() { if(confirm(currentLang === 'KR' ? "모두 비울까요?" : "Clear All?")) { canvas.clear(); canvas.backgroundColor = '#ffffff'; } }
-
-</script>
-
-</body>
 </html>
