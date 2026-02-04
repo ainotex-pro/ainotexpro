@@ -3,49 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ai NoteX Pro - VVIP Master</title>
+    <title>Ai NoteX Pro - History Analytics</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --gemini-blue: #4285F4; --gold: #FFD700; --gold-glow: rgba(255, 215, 0, 0.5); --bg: #0f172a; }
+        :root { --gemini-blue: #4285F4; --gold: #FFD700; --gold-glow: rgba(255, 215, 0, 0.4); --bg: #0f172a; }
         body { font-family: 'Pretendard', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: white; }
-        
         .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
         .back-btn { background: none; border: none; font-size: 28px; cursor: pointer; color: var(--gold); }
-        .title { font-size: 1.1rem; font-weight: bold; color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
-        .vvip-badge { background: linear-gradient(135deg, #FFD700, #B8860B); color: #000; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 900; margin-left: 5px; }
+        .title { font-size: 1.2rem; font-weight: bold; color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
 
-        .input-card { background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px; border: 1px solid var(--gold-glow); margin-bottom: 15px; }
+        /* 입력 카드 */
+        .input-card { background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 20px; border: 1px solid rgba(255, 215, 0, 0.2); margin-bottom: 15px; }
         .analysis-input { width: 100%; padding: 12px; border: none; background: rgba(255,255,255,0.1); border-radius: 10px; font-size: 1rem; color: white; outline: none; box-sizing: border-box; }
-        
-        /* 🎯 버튼 복구: 선형/막대 선택 */
         .mode-container { display: flex; gap: 10px; margin-top: 15px; }
-        .mode-btn { flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .mode-btn { flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         .mode-btn.active { background: var(--gold); color: var(--bg); box-shadow: 0 0 15px var(--gold-glow); }
-
         .analyze-btn { background: var(--gemini-blue); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; font-size: 1.1rem; }
 
-        /* 차트 구역 및 잠금 */
-        .chart-card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; height: 250px; position: relative; overflow: hidden; }
-        .locked-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); display: flex; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(8px); z-index: 10; transition: 0.5s; }
-        
-        .report-card { background: #ffffff; color: #1e293b; border-radius: 15px; padding: 20px; border-left: 8px solid var(--gold); text-align: left; margin-bottom: 25px; }
+        /* 차트 및 보고서 */
+        .chart-card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; height: 250px; }
+        .report-card { background: #ffffff; color: #1e293b; border-radius: 15px; padding: 20px; border-left: 8px solid var(--gold); text-align: left; margin-bottom: 30px; }
 
-        /* 🎯 기록 목록 복구 */
+        /* ✨ 사장님의 '역사 기록소' 디자인 */
         .history-section { border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 20px; }
-        .history-title { font-size: 1rem; color: var(--gold); margin-bottom: 15px; display: block; font-weight: bold; }
+        .history-title { font-size: 1.1rem; color: var(--gold); margin-bottom: 15px; display: block; font-weight: bold; }
         .history-list { display: flex; flex-direction: column; gap: 10px; }
-        .history-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
-        .history-date { font-size: 0.75rem; color: #94a3b8; }
-
-        /* 모달 */
-        #paymentModal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; background: white; color: #000; padding: 30px; border-radius: 25px; z-index: 100; box-shadow: 0 0 50px #000; text-align: center; }
-        .pay-btn { background: var(--gold); color: #000; border: none; padding: 15px 30px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .history-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .history-item:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+        .history-date { font-size: 0.8rem; color: #94a3b8; display: block; }
     </style>
 </head>
 <body>
 
-<div class="header" style="display: flex; flex-direction: column; align-items: center; padding: 15px 0 10px 0; /* 위아래 패딩 대폭 축소 */ position: relative; border-bottom: 1px solid rgba(255, 215, 0, 0.1); margin-bottom: 10px; /* 아래 박스와의 간격 최소화 */">
-    
     <div class="title" style="
         font-family: 'Times New Roman', Times, serif; 
         font-size: 1.7rem; 
@@ -60,7 +49,7 @@
         <span style="color: #FFD700; margin-right: 6px; -webkit-text-fill-color: initial;">⚜️</span> Ai NoteX Pro & Google Gemini  - Analysis Report
     </div>
 
-    <div class="vvip-badge" style="
+ <div class="vvip-badge" style="
         background: linear-gradient(135deg, #FFD700, #B8860B); 
         color: #000; 
         padding: 1px 12px; 
@@ -78,64 +67,34 @@
             ** MAIN **
         </button>
     </div>
+[공지]Google Gemini API 연결전 테스트 버전으로 실행 예시 화면
 </div>
-
+*********************************************************************************************************************************************************************************************************************************************************
 
     <div class="input-card">
-        <input type="text" id="analysisTitle" class="analysis-input" placeholder="분석명을 입력하세요...">
-        
+        <input type="text" id="analysisTitle" class="analysis-input" placeholder="분석할 내용을 입력하세요...">
         <div class="mode-container">
-            <button class="mode-btn active" id="btnLine" onclick="changeChartType('line')">📈 LINE CHART</button>
-            <button class="mode-btn" id="btnBar" onclick="changeChartType('bar')">📊 BAR CHART</button>
+            <button class="mode-btn active" id="btnLine" onclick="changeChartType('line')">📈 선형</button>
+            <button class="mode-btn" id="btnBar" onclick="changeChartType('bar')">📊 막대</button>
         </div>
-
-        <button class="analyze-btn" onclick="checkPremium()">RUN GOOGLE GEMINI ANALYSIS
-</button>
+        <button class="analyze-btn" onclick="startVisualAnalysis()">✨ AI 분석 및 저장 ✨</button>
     </div>
 
-    <div class="chart-card">
-        <div id="lockOverlay" class="locked-overlay">
-            <div style="font-size: 40px;">🔒</div>
-            <p style="color: var(--gold); font-weight: bold;">✨ Exclusive for VVIP <br>bership Members Only ✨</p>
-        </div>
-        <canvas id="mainChart"></canvas>
-    </div>
+    <div class="chart-card"><canvas id="mainChart"></canvas></div>
 
-<div id="reportContent" style="
-    text-align: center; 
-    padding: 40px 20px; 
-    color: rgba(255, 255, 255, 0.4); 
-    font-family: 'Arial', sans-serif; 
-    border: 1px solid rgba(255, 215, 0, 0.1); 
-    border-radius: 8px; 
-    background: rgba(255, 255, 255, 0.01);
-    min-height: 100px; /* 리포트가 들어올 공간을 미리 확보 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-">
-    <div style="font-size: 0.9rem; letter-spacing: 0.5px; font-weight: 500;">
-        Your analysis report will appear here.
+    <div class="report-card">
+        <div id="reportContent">새로운 분석을 시작하여 <strong>역사를 기록하십시오.</strong></div>
     </div>
-</div>
 
     <div class="history-section">
-        <span class="history-title">📜 AI Analysis Archive</span>
-        <div id="historyList" class="history-list"></div>
-    </div>
-
-    <div id="paymentModal">
-        <h2>💎 VVIP 무제한 패스</h2>
-        <p>제미나이 AI 분석과 모든 차트 기능을<br>즉시 잠금 해제합니다.</p>
-        <button class="pay-btn" onclick="activatePremium()">월 ₩99,000 결제 및 시작</button>
-        <p style="margin-top:15px; font-size:0.8rem; color:#666;" onclick="closeModal()">나중에 하기</p>
+        <span class="history-title">📜 분석 내용 목록 (Archive)</span>
+        <div id="historyList" class="history-list">
+            </div>
     </div>
 
     <script>
-        let isPremium = false;
         let myChart;
         let currentType = 'line';
-        let currentData = [0, 0, 0, 0, 0];
         const ctx = document.getElementById('mainChart').getContext('2d');
 
         function initChart(type, data) {
@@ -145,12 +104,12 @@
                 data: {
                     labels: ['1차', '2차', '3차', '4차', '5차'],
                     datasets: [{
-                        label: 'VVIP DATA', data: data,
-                        borderColor: '#FFD700', backgroundColor: type === 'bar' ? '#4285F4' : 'rgba(255, 215, 0, 0.1)',
-                        fill: true, tension: 0.4, borderWidth: 3
+                        label: '분석 수치', data: data,
+                        borderColor: '#4285F4', backgroundColor: type === 'bar' ? '#4285F4' : 'rgba(66, 133, 244, 0.1)',
+                        fill: true, tension: 0.4
                     }]
                 },
-                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { maintainAspectRatio: false }
             });
         }
 
@@ -158,144 +117,54 @@
             currentType = type;
             document.getElementById('btnLine').classList.toggle('active', type === 'line');
             document.getElementById('btnBar').classList.toggle('active', type === 'bar');
-            if(isPremium) initChart(currentType, currentData);
+            initChart(currentType, [Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100, Math.random()*100]);
         }
 
-        function checkPremium() {
-            if (!isPremium) { document.getElementById('paymentModal').style.display = 'block'; } 
-            else { startAnalysis(); }
-        }
-
-        function activatePremium() {
-            isPremium = true;
-            document.getElementById('paymentModal').style.display = 'none';
-            document.getElementById('lockOverlay').style.opacity = '0';
-            setTimeout(() => { document.getElementById('lockOverlay').style.display = 'none'; }, 500);
-            startAnalysis();
-        }
-
-        function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
-
-        function startAnalysis() {
-            const title = document.getElementById('analysisTitle').value || "미지정 작전";
-            currentData = Array.from({length: 5}, () => Math.floor(Math.random() * 100));
-            initChart(currentType, currentData);
+        function startVisualAnalysis() {
+            const title = document.getElementById('analysisTitle').value;
+            if(!title) return;
 
             const now = new Date();
-            const dateStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
-            const report = `<strong>[작전: ${title}]</strong> 완료.<br>제미나이 AI가 <span style="color:red">수익 신호</span>를 포착했습니다!`;
+            const dateStr = `${now.getFullYear()}.${now.getMonth()+1}.${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+            const randomData = Array.from({length: 5}, () => Math.floor(Math.random() * 100));
+            const report = `<strong>[분석 내용: ${title}]</strong><br>분석 결과, 모든 지표가 전략적 목표치에 도달했습니다. 기록을 보존합니다.`;
+
+            // 1. 화면 업데이트
+            initChart(currentType, randomData);
             document.getElementById('reportContent').innerHTML = report;
 
-            // 역사 저장
+            // 2. 역사 저장 (localStorage)
+            const historyObj = { title, date: dateStr, data: randomData, report };
             let history = JSON.parse(localStorage.getItem('gemini_history') || '[]');
-            history.unshift({ title, date: dateStr, data: currentData, report });
-            localStorage.setItem('gemini_history', JSON.stringify(history.slice(0, 5)));
+            history.unshift(historyObj); // 최신것을 위로
+            localStorage.setItem('gemini_history', JSON.stringify(history.slice(0, 10))); // 최근 10개만 보관
+
             renderHistory();
         }
 
         function renderHistory() {
-            const list = document.getElementById('historyList');
+            const historyList = document.getElementById('historyList');
             const history = JSON.parse(localStorage.getItem('gemini_history') || '[]');
-            list.innerHTML = history.map((item, idx) => `
-                <div class="history-item" onclick="loadHistory(${idx})">
-                    <span class="history-date">${item.date}</span><br>
+            historyList.innerHTML = history.map((item, index) => `
+                <div class="history-item" onclick="loadHistory(${index})">
+                    <span class="history-date">${item.date}</span>
                     <strong style="color:var(--gold)">${item.title}</strong>
                 </div>
             `).join('');
         }
 
-        function loadHistory(idx) {
-            if(!isPremium) { checkPremium(); return; }
+        function loadHistory(index) {
             const history = JSON.parse(localStorage.getItem('gemini_history'));
-            const item = history[idx];
-            currentData = item.data;
-            initChart(currentType, currentData);
+            const item = history[index];
+            initChart(currentType, item.data);
             document.getElementById('reportContent').innerHTML = item.report;
+            document.getElementById('analysisTitle').value = item.title;
         }
 
-        window.onload = () => { initChart(currentType, currentData); renderHistory(); };
-
-/* 🎯 사령관님의 눈건강을 지키는 '아이케어(Eye-Care) 슬림' 설정 */
-.mode-btn { 
-    padding: 4px 0;      /* 너무 얇지도, 두껍지도 않은 최적의 4px */
-    font-size: 0.8rem;   /* 눈이 편안한 최소 크기 */
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.analyze-btn { 
-    padding: 8px;        /* 누르기 딱 좋은 쾌적한 높이 */
-    font-size: 0.85rem;
-    border-radius: 6px;
-    margin-top: 10px;
-}
-
-.history-item { 
-    padding: 8px 12px;   /* 항목 간의 간격을 주어 눈의 피로도 감소 */
-    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-}
-
-
-
+        window.onload = () => {
+            initChart('line', [0,0,0,0,0]);
+            renderHistory();
+        };
     </script>
-
-<style>
-    /* ... 이전 root 및 기본 설정 동일 ... */
-    
-    /*  '슬림'  반영 */
-    .mode-container { 
-        display: flex; 
-        gap: 8px; 
-        margin-top: 12px; 
-        padding: 0 10px;
-    }
-    
-    .mode-btn { 
-        flex: 1; 
-        background: rgba(255, 255, 255, 0.03); 
-        border: 1px solid rgba(255, 215, 0, 0.3); 
-        color: var(--gold); 
-        padding: 6px 0; /* 세로 높이를 확 줄여서 슬림하게! */
-        border-radius: 6px; /* 곡률을 줄여서 더 날카로운 느낌 */
-        cursor: pointer; 
-        font-weight: 500; 
-        font-size: 0.85rem; /* 글자 크기도 세련되게 축소 */
-        transition: 0.2s; 
-    }
-    
-    .mode-btn.active { 
-        background: var(--gold); 
-        color: var(--bg); 
-        border-color: var(--gold);
-        box-shadow: 0 0 10px var(--gold-glow); 
-    }
-
-    .analyze-btn { 
-        background: linear-gradient(to right, #4285F4, #3b82f6); 
-        color: white; 
-        border: none; 
-        padding: 10px; /* 버튼 높이 축소 */
-        border-radius: 8px; 
-        font-weight: bold; 
-        cursor: pointer; 
-        margin-top: 15px; 
-        width: calc(100% - 20px); 
-        margin-left: 10px;
-        font-size: 0.9rem; /* 전체적인 슬림화 */
-        letter-spacing: 1px;
-    }
-
-    /* 기록 목록도 더 얇고 세련되게 */
-    .history-item { 
-        background: rgba(255,255,255,0.02); 
-        padding: 10px 15px; 
-        border-radius: 8px; 
-        border: 1px solid rgba(255,255,255,0.05);
-        margin-bottom: 5px;
-    }
-    .history-date { font-size: 0.7rem; opacity: 0.6; }
-</style>
-
-
-</body>
+   </body>
 </html>
