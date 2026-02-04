@@ -79,7 +79,7 @@ function runMemoSearch() {
 // 5. 메모 추가 (알림 예시)
 function addNote() { 
     alert("메모가 추가되었습니다"); 
-    // 실제 추가 로직이 필요하면 나중에 여기에 더 입력!
+    // 실제 추가 로직이 필요하면 나중에 여기에 더 넣으시면 됩니다!
 }
 
 /* Ai NoteX Pro Beta 문자 보내기 태그 2026.01.20  */
@@ -111,7 +111,7 @@ if(type === 'cloud') {
     { ...opt, scaleX: size/30, scaleY: size/30 });
 }
 
-// 말풍선 !)
+// 말풍선 (아이들이 글자 써넣기 최고!)
 if(type === 'chat') {
     obj = new fabric.Path('M 10 10 H 90 V 70 H 40 L 20 90 V 70 H 10 Z', 
     { ...opt, scaleX: size/50, scaleY: size/50 });
@@ -139,7 +139,7 @@ function sendToGooglePhotos() {
     document.body.removeChild(link);
 
     // 4. 구글 포토 업로드 '직통 주소'로 이동
-    // 이 주소는 구글 포토에서 바로 "컴퓨터에서 선택" 창을 유도하는 가장 가까운 지점.
+    // 이 주소는 구글 포토에서 바로 "컴퓨터에서 선택" 창을 유도하는 가장 가까운 지점입니다.
     setTimeout(function() {
         alert("🎉 그림이 저장되었습니다!\n\n화면 하단에 생성된 파일을 마우스로 '꾹' 눌러서\n새로 열린 구글 창에 '툭' 던져넣으세요!");
         window.open('https://photos.google.com/upload', '_blank');
@@ -186,7 +186,7 @@ function updateSaveList() {
     // 로컬 스토리지 키 명칭 확인 (AiNoteX_Saves 가 맞는지 확인!)
     const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves') || '{}');
     
-    // 💡 핵심: 목록을 그리기 전에 이 문구.
+    // 💡 핵심: 목록을 그리기 전에 이 문구를 가장 먼저 삽입합니다.
     select.innerHTML = '<option value="">📂 저장된 목록 보기</option>';
     
     for (let title in allSaves) {
@@ -203,7 +203,7 @@ function updateSaveList() {
 
     const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
     
-    // 1. 박스 안을 비우면서 동시에 '기본 문구'
+    // 1. 박스 안을 비우면서 동시에 '기본 문구'를 강제로 집어넣습니다.
     select.innerHTML = '<option value="" disabled selected>📂 저장 목록 보기</option>';
     
     for (let title in allSaves) {
@@ -220,7 +220,7 @@ function updateSaveList() {
         // 데이터가 없어도 빈 객체({})를 가져오게 설정
         const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves') || '{}');
         
-        // [중요] 목록을 채우기 전에 무조건 문패
+        // [중요] 목록을 채우기 전에 무조건 문패를 먼저 박습니다!
         select.innerHTML = '<option value="">📂 저장된 목록 보기</option>';
         
         // 저장된 목록이 있을 때만 추가
@@ -235,6 +235,6 @@ function updateSaveList() {
         select.selectedIndex = 0;
     }
 
-// 4. 페이지가 로드될 때와 0.5초 뒤에 한 번 더 실행
+// 4. 페이지가 로드될 때와 0.5초 뒤에 한 번 더 실행해서 확실히 글자를 박습니다.
 window.addEventListener('load', updateSaveList);
 setTimeout(updateSaveList, 500);
