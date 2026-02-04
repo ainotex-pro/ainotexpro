@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AiNoteX Pro - Global Master (EN)</title>
+    <title>AiNoteX Pro - Global Master</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,7 +12,7 @@
         .control-panel { background: #8cabd1; padding: 8px; border-radius: 12px; width: 100%; max-width: 450px; border: 3px solid #1a3a5f; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 4px; box-sizing: border-box; }
         .row { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; }
         
-        /* 기본 버튼 스타일 - 사장님 성공 수치 적용 */
+        /* 기본 버튼 스타일 - 수치 적용 */
         button { 
             flex: 1; min-width: 45px; height: 22px !important; padding: 0 !important; 
             line-height: 22px !important; font-size: 10px !important; border: none; 
@@ -29,12 +29,11 @@
         select { flex: 2; height: 22px; padding: 0 5px; border-radius: 5px; border: 2px solid #1a3a5f; font-size: 10px; font-weight: bold; }
         .canvas-container-box { border: 5px solid #4285F4; border-radius: 12px; background: white; width: 100%; max-width: 1000px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
     </style>
-    
     <style>
         body { margin: 0; padding: 15px; background: linear-gradient(180deg, #fefb94 0%, #a1ffce 100%); font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .header-bar { background: white; border: 3px solid #4285F4; padding: 10px 40px; border-radius: 50px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 20px; font-weight: bold; color: #4285F4; }
         
-        .lang-control { margin-bottom: 15px; background: rgba(255, 255, 255, 0.5); padding: 5px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; border: 1px solid #1a3a5f; }
+        .lang-control { margin-bottom: 15px; background: rgba(255, 255, 255, 0.5); padding: 5px 20px; border-radius: 30px; display: flex; align-items: center; gap: 12px; border: 1px solid #1a3a5f; }
         .lang-btn { background: none !important; border: none !important; box-shadow: none !important; font-weight: bold; cursor: pointer; color: #1a3a5f; font-size: 14px; padding: 5px !important; min-width: auto !important; }
         .lang-btn.active { color: #4285f4; text-decoration: underline; font-size: 16px; }
         .lang-divider { color: #ccc; }
@@ -52,10 +51,6 @@
         .canvas-container-box { border: 5px solid #4285F4; border-radius: 12px; background: white; width: 100%; max-width: 1000px; overflow: hidden; }
     </style>
 </head>
-<head>
-    <meta name="google" content="notranslate">
-    
-</head>
 <body>
 
 <div class="header-bar">💎 CANVAS STATION 💎</div>
@@ -66,18 +61,22 @@
     <button id="btn-en" class="lang-btn active" onclick="changeLang('EN')">EN</button>
 </div>
 
-<div id="sub-title" style="margin-bottom: 15px; font-size: 11px; font-weight: bold; color: #1a3a5f; letter-spacing: 1.5px; opacity: 0.8;">
+<div id="sub-title" style="margin-bottom: 15px; font-size: 10px; font-weight: bold; color: #1a3a5f; letter-spacing: 1.5px; opacity: 0.8;">
      [ CANVAS STATION - AI NOTEX PRO & GOOGLE GEMINI ]
 </div>
+<div class="control-panel">
+<body onload="updateSaveList()">
 
 <div class="control-panel">
-    <div class="row" style="background: rgba(255,255,255,0.4); padding: 8px; border-radius: 10px;">
-        <select id="save-list"><option value="">📂 Saved List</option></select>
-        <button id="btn-load" class="btn-draw" style="min-width: 60px;" onclick="loadFromList()">LOAD</button>
-    </div>
-    
+    <select id="save-list">
+        <option value="">📂 View Saved List</option>
+    </select>
+    <button class="btn-draw" style="min-width: 60px;" onclick="loadFromList()">Load</button>
+
+
+</div>
     <div class="row">
-        <button id="btn-select" class="btn-select" onclick="setMode('select')">🖱️ SELECT</button>
+        <button id="btn-select" class="btn-select" onclick="setMode('select')">🖱️SELECT</button>
         <button id="btn-draw" class="btn-draw" onclick="setMode('draw')">✏️ DRAW</button>
         <button id="btn-addtext" class="btn-text" onclick="addObj('text')">✍️ TEXT</button>
     </div>
@@ -85,72 +84,99 @@
     <div class="row">
         <button id="btn-delobj" class="btn-delete" onclick="deleteObj()">🗑️ DELETE</button>
         <button id="btn-clear" class="btn-delete" onclick="clearAll()">🚀 CLEAR ALL</button>
+        <button class="btn-share" onclick="shareCanvas()">📤 Message</button>
         <button id="btn-save" class="btn-save" onclick="saveWithTitle()">💾 SAVE AS</button>
     </div>
 
     <div class="row" style="font-size: 12px; font-weight: bold; color: white;">
         🎨  COLOR CODE:<input type="color" id="cp" value="#1a73e8" onchange="updateBrush()" style="width:30px; height:20px; border:none; padding:0;">
         📏 SIZE<input type="number" id="sp" value="50" style="width:50px; height:17px; font-size:12px;">
+  
+    <button onclick="location.href='MAIN.HTML'" 
+            style="padding: 8px 15px; background: #222; border: 2px solid #4deeea; color: #4deeea; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(77, 238, 234, 0.3); font-size: 13px;">
+         ** MAIN **
+    </button></div>
+
+<button type="button" onclick="alert('Google Photos API is currently being updated for real-time sync! \nPlease stay tuned for the upcoming global update! 🚀')" class="btn-google-photos">
+    📸 Go to Google Photos (Updating...)
+</button>
+</a>
+</a>
+</a>
+<style>
+    /*  '25사이즈' 명품 버튼 스타일 */
+    .shape-btn-25 {
+        width: 25px !important;
+        height: 25px !important;
+        min-width: 25px !important;
+        max-width: 25px !important;
+        
+        padding: 0 !important;
+        margin: 1px !important; /* 간격을 1px로 주면 더 정갈합니다 */
+        font-size: 16px !important; /* 25사이즈에 딱 맞는 아이콘 크기 */
+        
+        background-color: #ffffff !important;
+        border: 1px solid #dcdcdc !important;
+        border-radius: 4px !important;
+        
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* 미세한 입체감 추가 */
+    }
+
+    .shape-btn-25:hover {
+        background-color: #f8f9fa !important;
+        transform: scale(1.05); /* 마우스 올리면 살짝 커지는 효과 */
+    }
+</style>
+
+<div style="padding: 5px; background: #8da9d4; border-radius: 8px;"> <button class="shape-btn-25" onclick="addObj('rect')">⬜</button>
+    <button class="shape-btn-25" onclick="addObj('circle')">⚪</button>
+    <button class="shape-btn-25" onclick="addObj('ring')">⭕</button>
+    <button class="shape-btn-25" onclick="addObj('star')">⭐</button>
+    <button class="shape-btn-25" onclick="addObj('heart')">❤️</button>
+    <button class="shape-btn-25" onclick="addObj('window')">🪟</button>
+    
+<button class="shape-btn-25" onclick="addObj('cloud')">☁️</button>
+    <button class="shape-btn-25" onclick="addObj('chat')">💬</button>
+    <button class="shape-btn-25" onclick="addObj('arrow')">↗️</button>
+    <button class="shape-btn-25" onclick="addObj('door')">🚪</button>
+</div>
+
+   
+<div class="row d-flex flex-nowrap" style="overflow-x: auto; padding: 5px;">
+</div>
+<button class="group-btn-master" onclick="loadShapes('A')">Diagram - Update Coming Soon</button>
+        <button id="btn-dellist" class="btn-delete" onclick="deleteFromList()" style="flex:2;">🗑️  Delete list selection</button>
+    <button onclick="location.href='main.HTML'" 
+            style="padding: 8px 15px; background: #222; border: 2px solid #4deeea; color: #4deeea; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(77, 238, 234, 0.3); font-size: 13px;">
+         ** MAIN **
+    </button>
+    </div>    
     </div>
 
-    <div class="row">
-        <button onclick="addObj('rect')" id="btn-rect">⬜ RECT</button>
-        <button onclick="addObj('circle')" id="btn-circle">⚪ CIRCLE</button>
-        <button onclick="addObj('ring')" id="btn-ring">⭕ RING</button>
-    </div>
-    <div class="row">
-        <button onclick="addObj('star')" id="btn-star">⭐ STAR</button>
-        <button onclick="addObj('heart')" id="btn-heart">❤️ HEART</button>
-        <button onclick="addObj('window')" id="btn-window">🪟 WINDOW</button>
-    </div>
-    <div class="row">
-        <button onclick="addObj('cloud')" id="btn-cloud">☁️ CLOUD</button>
-        <button onclick="addObj('chat')" id="btn-chat">💬 CHAT</button>
-        <button onclick="addObj('arrow')" id="btn-arrow">↗️ ARROW</button>
-    </div>
-    <div class="row">
-        <button onclick="addObj('door')" id="btn-door">🚪 DOOR</button>
-        <button id="btn-dellist" class="btn-delete" onclick="deleteFromList()" style="flex:2;">🗑️ DELETE PERMANENTLY</button>
-    </div>
-</div>
+
 
 <div class="canvas-container-box"><canvas id="c" width="1000" height="530"></canvas></div>
 
-<div style="text-align: center; margin-top: 25px; padding: 0 10px; line-height: 1.4;">
-    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
-    <div style="font-size: 0.7rem; color: #999; letter-spacing: 1px;">
-        [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
-    </div>
-    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
-    <div style="font-size: 0.75rem; color: #777; margin: 3px 0;">
-        "현재와 미래의 모든 길은 구글로 통한다" - 정승철
-    </div>
-    <div style="font-size: 0.65rem; color: #aaa; margin: 0;">
-        "All roads, present and future, lead to Google. - Jeong Seung-cheol"
-    </div>
-    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
-    <div style="font-size: 0.7rem; color: #bbb; margin: 3px 0;">
-        [ Ai NoteX Pro Beta Test v2.0 ]
-    </div>
-    <div style="font-size: 0.75rem; color: #888; margin: 3px 0;">
-        [ NICKNAME - TREE ] <span style="font-size: 12px; opacity: 0.6;">🌳</span>
-    </div>
-    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
-</div>
-
 <script>
+// [canvas.html 전용 언어 전환 스위치]
+function changeLang(lang) {
+    if (lang === 'KR') {
+        // 이미 한글판이니 새로고침만 하거나 canvas.html로 이동
+        location.href = 'canvas.html'; 
+    } else {
+        // 영어 버튼을 누르면 영문판(canvasen.html)으로 정밀 도약!
+        location.href = 'canvasen.html';
+    }
+}
+
     var canvas = new fabric.Canvas('c');
     canvas.backgroundColor = '#ffffff';
-    var currentLang = 'EN';
 
     window.onload = function() { updateSaveList(); };
-
-    // [핵심] 영문판에서 한글판 파일(canvas.html)로 넘어가는 함수
-    function changeLang(lang) {
-        if(lang === 'KR') {
-            location.href = 'canvas.html'; // 한글판 파일명
-        }
-    }
 
     function setMode(mode) {
         canvas.isDrawingMode = (mode === 'draw');
@@ -163,7 +189,7 @@
     function updateBrush() { if(canvas.isDrawingMode) canvas.freeDrawingBrush.color = document.getElementById('cp').value; }
     
     function saveWithTitle() {
-        const title = prompt("Enter Title:");
+        const title = prompt("저장할 제목:");
         if (!title) return;
         const canvasData = JSON.stringify(canvas.toJSON());
         let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
@@ -172,16 +198,20 @@
         updateSaveList();
     }
 
-    function updateSaveList() {
-        const select = document.getElementById('save-list');
-        const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
-        select.innerHTML = `<option value="">📂 Saved List</option>`;
-        for (let title in allSaves) {
-            let opt = document.createElement('option');
-            opt.value = title; opt.innerHTML = title;
-            select.appendChild(opt);
-        }
+function updateSaveList() {
+    const select = document.getElementById('save-list');
+    const allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
+    
+    // 📂 여기서 "저장 목록 보기"를 첫 번째 칸에 딱 고정!
+    select.innerHTML = `<option value="" disabled selected>📂 Saved List</option>`;
+    
+    for (let title in allSaves) {
+        let opt = document.createElement('option');
+        opt.value = title; 
+        opt.innerHTML = title;
+        select.appendChild(opt);
     }
+}
 
     function loadFromList() {
         const title = document.getElementById('save-list').value;
@@ -192,7 +222,7 @@
 
     function deleteFromList() {
         const title = document.getElementById('save-list').value;
-        if (!title || !confirm("Delete?")) return;
+        if (!title || !confirm("영구 삭제하시겠습니까?")) return;
         let allSaves = JSON.parse(localStorage.getItem('AiNoteX_Saves_All') || '{}');
         delete allSaves[title];
         localStorage.setItem('AiNoteX_Saves_All', JSON.stringify(allSaves));
@@ -219,11 +249,75 @@
         if(obj) { canvas.add(obj); canvas.setActiveObject(obj); canvas.renderAll(); }
     }
     function deleteObj() { const active = canvas.getActiveObject(); if(active) { canvas.remove(active); canvas.renderAll(); } }
-    function clearAll() { if(confirm("Clear?")) { canvas.clear(); canvas.backgroundColor = '#ffffff'; } }
+    function clearAll() { if(confirm("모두 비울까요?")) { canvas.clear(); canvas.backgroundColor = '#ffffff'; } }
+
+    async function shareCanvas() {
+        const dataUrl = canvas.toDataURL({ format: 'png', quality: 1 });
+        if (navigator.share) {
+            try {
+                const res = await fetch(dataUrl);
+                const blob = await res.blob();
+                const file = new File([blob], "AiNoteX_Art.png", { type: "image/png" });
+                await navigator.share({ files: [file], title: 'AiNoteX 작품', text: '내가 그린 그림입니다! 🌳' });
+            } catch (err) { console.log("공유 취소"); }
+        } else {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'AiNoteX_Art.png';
+            link.click();
+            alert("PC에 그림이 저장되었습니다!");
+        }
+    }
+function goToGooglePhotos() {
+    // 가장 확실한 구글 포토 공식 주소입니다!
+    window.open('https://photos.google.com/', '_blank');
+}
+
+function sendToGooglePhotos() {
+    // 1. 현재 1000px 캔버스의 그림을 이미지 데이터로 추출!
+    var canvas = document.getElementById('c'); // 캔버스 ID 확인!
+    var image = canvas.toDataURL("image/png");
+
+    // 2. 임시 링크를 만들어 내 기기에 먼저 저장 (이게 가장 확실한 배달 준비입니다)
+    var link = document.createElement('a');
+    link.download = 'AiNoteX_Work.png';
+    link.href = image;
+    link.click();
+
+    // 3. 그리고 구글 포토 업로드 페이지를 바로 띄워줍니다!
+    // 아래 주소는 구글 포토의 '업로드 대기' 상태로 바로 가는 주소입니다.
+    alert("그림이 저장되었습니다! 이제 열리는 구글 화면에 방금 저장된 파일을 '드래그'하거나 선택하세요!");
+    window.open('https://photos.google.com/upload', '_blank');
+}
+
+alert("🎨 그림이 '다운로드' 폴더에 저장되었습니다!\n\n이제 열리는 구글 화면에서 방금 저장된 [" + fileName + "] 파일을 선택해 주세요!");
 </script>
-
-
 </body>
+<div style="text-align: center; margin-top: 25px; padding: 0 10px; line-height: 1.4;">
+    
+    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
+    <div style="font-size: 0.75rem; color: #999; letter-spacing: 1px;">
+        [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
+    </div>
 
+    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
+    <div style="font-size: 0.75rem; color: #777; margin: 3px 0;">
+        "현재와 미래의 모든 길은 구글로 통한다" - 정승철
+    </div>
+    <div style="font-size: 0.65rem; color: #aaa; margin: 0;">
+        "All roads, present and future, lead to Google. - Jeong Seung-cheol"
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
+    <div style="font-size: 0.7rem; color: #bbb; margin: 3px 0;">
+        [ Ai NoteX Pro Beta Test v2.0 ]
+    </div>
+    
+    <div style="font-size: 0.75rem; color: #888; margin: 3px 0;">
+        [ 닉네임 - 나무한그루 ] <span style="font-size: 12px; opacity: 0.6;">🌳</span>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 8px auto; width: 90%;">
+</div>
 
 </html>

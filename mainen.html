@@ -23,17 +23,6 @@
 
     <style>
 
-/* Ai NoteX Pro Beta Test v1.0  */
-/* Ai NoteX Pro 2025.10.09 PWA ~ Ai Note로 개발 시작하여 2026.10~11월경에  명칭 Ai NoteX Pro 확정 */
-/* Ai NoteX Pro 2026.01.13 한국저작권위원 저작권 등록 접수 완료 */
-/* Ai NoteX Pro 2026.01.15 메모 검색어 찾기 업데이드 완료 */
-/* Ai NoteX Pro 2026.01.17 버그 수정 작업 중*/
-/* Ai NoteX Pro 2026.01.21 KR / EN 버튼과 영문 버전 작업 완료 */
-/* Ai NoteX Pro 2026.01.13 한국저작권위원 저작권 등록 접수 */
-/* Ai NoteX Pro 2026.01.22 한국저작권위원 저작권 수정 보완 접수 */
-
-/* Ai NoteX Pro 2026.00.00 한국저작권위원 저작권 업데이트 변경 등록 신청 준비 */
-
         /* 1. 배경 설정 (여기에 배경 이미지를 고정합니다!) */
         body { 
             margin: 0; 
@@ -354,19 +343,31 @@
       
 </a>
 
+<a href="piano.html" target="_blank" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.08)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 38px; margin: 13px auto; padding: 0 25px; background-color: #ffffff; border: none; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 900; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.08); cursor: pointer; box-sizing: border-box;">
+    
+    <span style="margin-right: 12px; font-size: 18px; display: flex; align-items: center;">🎹 </span>
+    <span style="flex-grow: 1; text-align: left;">GRAND PIANO </span>        
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+      
+</a>
 
-<div style="text-align: center;">
-    <a href="javascript:void(0);" 
-       onclick="document.getElementById('ebookPopup').style.display='flex';"
-       onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
-       style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 38px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
-        
+<a href="ebook_eb1_KR.html" target="_blank" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.08)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 38px; margin: 13px auto; padding: 0 25px; background-color: #ffffff; border: none; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 900; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.08); cursor: pointer; box-sizing: border-box;">
+    
         <span style="font-size: 20px; margin-right: 12px; display: flex; align-items: center;">📖</span>
-        <span style="flex-grow: 1; text-align: left;">E-Book - Update Coming Soon</span>
+        <span style="flex-grow: 1; text-align: left;">Ai NoteX Pro 전자책 업데이트 예정</span>
         <span style="color: #5f6368; font-size: 14px;">➔</span>
-    </a>
+      
+</a>
+        </div>
+    </div>
 </div>
+
 
 <div id="ebookPopup" 
      onclick="this.style.display='none';" 
@@ -454,7 +455,7 @@
             <div>
 
                 <button onclick="loadAndShow('all')" style="padding:5px 10px; border-radius:5px; border:1px solid #007bff; background:#fff; color:#007bff; cursor:pointer;">View All Categories</button>
-                <select id="filterSelector" onchange="loadAndShow(this.value)" style="width:100px; margin:0; padding:5px; font-size:14px;">
+                <select id="filterSelector" onchange="loadAndShow(this.value)" style="width:130px; margin:0; padding:5px; font-size:14px;">
                     <option value="all">Category</option>
     <option value="Message">00 - Message</option>
     <option value="Life · Shopping">01 Life · Shopping</option>
@@ -652,14 +653,14 @@ function filterByCategory() {
     loadNotes(selectedValue);
 }
 
-// [index.html 전용 언어 전환 스위치]
+// [main.html 전용 언어 전환 스위치]
 function changeLang(lang) {
     if (lang === 'KR') {
-        // 이미 한글판이니 새로고침만 하거나 index.html로 이동
-        location.href = 'index.html'; 
+        // 이미 한글판이니 새로고침만 하거나 main.html로 이동
+        location.href = 'main.html'; 
     } else {
-        // 영어 버튼을 누르면 영문판(indexen.html)으로 정밀 도약!
-        location.href = 'indexen.html';
+        // 영어 버튼을 누르면 영문판(mainen.html)으로 정밀 도약!
+        location.href = 'mainen.html';
     }
 }
 </script>

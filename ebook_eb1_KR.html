@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>AiNoteX Pro</title>
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&family=Playfair+Display:wght@900&family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* 2026.01.23 - Ai NoteX Pro v2.0  Category' 단축 및 전 기종 최적화 적용 */
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* 배경 이미지는 images 폴더 기준으로 고정 */
+            background: url('images/main-bg-1.webp') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: center;
+        }
+
+/* 3. 타이틀 폰트 스타일 -  'Playfair' 원본 복구! */
+    .header-text { 
+        /* 사령관님이 명하신 정예 설정 */
+        font-family: 'Playfair Display', serif; /* 명품 폰트 적용 */
+        font-size: 35px; /* 시원시원하게 */
+        font-weight: 900; /* 아주 두껍게! */
+        letter-spacing: -1px; /* 단단한 느낌 */
+        
+        /* 구글색 그라데이션 (파랑에서 초록으로!) */
+        background: linear-gradient(45deg, #4285F4, #34A853); 
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+        display: inline-block;
+        padding: 5px 0;
+    }
+/* 2. KR/EN 버튼 가독성 (진한 색으로!) */
+        .lang-btn {
+            background: none; border: none; color: #333333 !important;
+            font-weight: 800; cursor: pointer; text-shadow: 1px 1px 0px #ffffff;
+        }
+
+/* 3. 메인 타이틀 그라데이션 (확실하게 적용!) */
+        .header-text { 
+            font-size: 33px; font-weight: 900; 
+            background: linear-gradient(to right, #0066cc, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* 언어 조절 버튼 레이아웃 */
+        .lang-control {
+            padding: 10px;
+            text-align: right;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .lang-divider { color: white; margin: 0 5px; }
+
+        /* 상단 헤더 박스 */
+        .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #FFFACD;
+            padding: 10px 17px;
+            margin: 10px auto 20px auto;
+            width: 85%;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-text {
+            font-size: 28px; /* 아이폰 4 고려하여 살짝 조절 */
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #0066cc !important;
+        }
+
+<style>
+    /* 1. 언어 버튼 상단 여백 축소 */
+    .lang-control {
+        padding: 5px 10px 0 0; /* 위쪽 여백을 5px로 확 줄였습니다! */
+        text-align: right;
+    }
+
+    /* 2. 메인 로고 박스 여백 축소 */
+    .header-bar {
+        margin: 5px auto 10px auto; /* 위아래 간격을 5px, 10px로 밀착! */
+        padding: 8px 15px; /* 박스 내부도 날씬하게! */
+    }
+
+    /* 3. [ 월드 베스트셀러 ] 금테 박스 상단 여백 축소 */
+    .world-title-box {
+        margin: 10px auto 10px auto; /* 30px이던 여백을 10px로 강제 압축! */
+        padding: 12px 5px; 
+    }
+
+    /* 4. 아래 리스트 버튼들 사이 간격 축소 */
+    .external-link-btn {
+        margin: 3px auto; /* 버튼 사이 간격도 6px로 좁혀서 더 많이 보이게! */
+    }
+
+        /* 구글 스타일 버튼 */
+        .external-link-btn {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            height: 38px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #ffffff;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            color: #000000 !important;
+            font-size: 14.5px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        .external-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* 반응형 대응 (작은 화면) */<a href="https://sites.google.com/view/the-old-man-and-the-sea-en/%ED%99%88" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 노인과 바다 (헤밍웨이)</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+        @media (max-width: 320px) { /* 아이폰 4 전용 */
+            .header-text { font-size: 22px; }
+            .header-bar { width: 90%; padding: 8px; }
+        }
+
+// ... 앞부분 생략 (기존 코드 유지) ...
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    val myWebView: WebView = findViewById(R.id.webview)
+    
+    // --- 여기서부터가 '좌우 정렬' 핵심 명령입니다! ---
+    myWebView.settings.apply {
+        javaScriptEnabled = true // 자바스크립트 허용
+        
+        // 1. 글자가 화면 밖으로 나가지 않게 자동으로 줄을 바꿔라!
+        layoutAlgorithm = WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING
+        
+        // 2. 페이지를 화면 너비에 강제로 맞춰라!
+        useWideViewPort = true
+        loadWithOverviewMode = true
+        
+        // 3. 손가락으로 확대해도 글자가 예쁘게 정렬되게 하라!
+        setSupportZoom(true)
+        builtInZoomControls = true
+        displayZoomControls = false // 돋보기 아이콘은 숨기기 (깔끔하게!)
+    }
+    
+    // 스마트폰인 척 속여서 '모바일 버전'을 강제로 불러오게 하는 암구호입니다!
+    myWebView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
+
+    myWebView.webViewClient = WebViewClient()
+    myWebView.loadUrl("https://www.gutenberg.org") // 구텐베르크 주소
+}
+
+/* 5. 100선 버튼 사이 간격 (밀착!) */
+    .external-link-btn {
+        margin: 5px auto !important; /* 버튼끼리 찰떡같이 붙게! */
+        height: 40px !important;
+    }
+
+
+
+    </style>
+</head>
+<body>
+
+<div style="padding: 0px 15px 0 0 !important; text-align: right; margin-bottom: -5px;">
+    <button class="lang-btn" onclick="location.href='indexkr.html'">KR</button>
+    <span style="color: #333;">/</span>
+    <button class="lang-btn" onclick="location.href='indexen.html'">EN</button>
+</div>
+
+<div style="background: rgba(255, 255, 255, 0.9); border: 2px solid #FFFACD; padding: 5px 10px; margin: 0 auto 5px auto; width: 85%; max-width: 900px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+    <img src="images/icon-40.png" style="width: 25px; height: 25px; margin-right: 10px;">
+    <span class="header-text" style="font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900;">Ai NoteX Pro</span>
+</div>
+
+<div style="
+    margin: 5px auto 12px auto !important; 
+    width: 82%;              /* 94%에서 82%로 줄여서 좌우 여백을 줬습니다! */
+    max-width: 450px;        /* 너무 커지지 않게 상한선을 딱 잡았습니다! */
+    background: linear-gradient(135deg, 	#20B2AA, 	#4682B4); 
+    color: #ffffff; 
+    padding: 14px 5px !important; 
+    border-radius: 17px;      /* 둥근 모서리를 조금 더 살려 부드럽게! */
+    border: 5px double #FFD700; 
+    text-align: center; 
+    font-weight: 800; 
+    font-size: 15px;          /* 글자 크기도 박스에 맞춰 살짝 조정! */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+">
+ 세계 명작 도서관 / 전자책 15선
+</div>
+</div>
+
+<div style="
+    margin: 5px auto 12px auto !important; 
+    width: 82%;              /* 94%에서 82%로 줄여서 좌우 여백을 줬습니다! */
+    max-width: 450px;        /* 너무 커지지 않게 상한선을 딱 잡았습니다! */
+    background: linear-gradient(135deg, 	#20B2AA, 	#4682B4); 
+    color: #ffffff; 
+    padding: 14px 5px !important; 
+    border-radius: 17px;      /* 둥근 모서리를 조금 더 살려 부드럽게! */
+    border: 5px double #FFD700; 
+    text-align: center; 
+    font-weight: 800; 
+    font-size: 15px;          /* 글자 크기도 박스에 맞춰 살짝 조정! */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+">
+ 전자책 100권 업데이트 예정
+</div>
+</div>
+
+<a href="https://sites.google.com/view/the-old-man-and-the-sea-en/%ED%99%88" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">01. 노인과 바다 (헤밍웨이) 업데이트 중</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 허먼 멜빌의 《 모비 딕 》 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 제인 오스틴의 오만과 편견 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 위대한 개츠비 (F. 스콧 피츠제럴드) - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 인형의 집 (헨리크 입센) - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 위대한 유산 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 로미오와 줄리엣 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 걸리버 여행기 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 위대한 유산 - 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0.  업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0.  업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+<a href="" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+
+
+
+<a href="https://sites.google.com/view/the-old-man-and-the-sea-en/%ED%99%88" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+
+<a href="https://sites.google.com/view/the-old-man-and-the-sea-en/%ED%99%88" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">0. 업데이트 예정</span>
+    <span style="color: #5f6368; font-size: 14px;">➔</span>
+</a>
+
+    <button onclick="location.href='MAIN.HTML'" 
+            style="padding: 8px 15px; background: #222; border: 2px solid #4deeea; color: #4deeea; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(77, 238, 234, 0.3); font-size: 13px;">
+         ** MAIN **
+    </button></div>
+
+    </p>
+<p style="font-size: 0.9rem; color: 	#2F4F4F;">
+    [ 고전 명작 순차적으로 업데이트 예정입니다 ]
+</p>
+    </p>
+<p style="font-size: 0.9rem; color: 	#2F4F4F;">
+    [ Ai NoteX Pro Beta Test v2.0 ]
+</p>
+</div>
+
+    <script>
+        // 서비스 워커 등록
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log("서비스 워커 등록 완료!"))
+                .catch(err => console.log("등록 실패:", err));
+        }
+
+        // 언어 변경 함수 (파일 이동 방식)
+        function changeLang(lang) {
+            if(lang === 'KR') location.href = 'indexkr.html';
+            else location.href = 'indexen.html';
+        }
+
+
+
+// 1. 화면 폭에 딱 맞게 글자를 정렬하라! (자동 줄바꿈 명령)
+myWebView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING
+
+// 2. 페이지를 화면 너비에 맞추기! (옆으로 안 퍼지게 잡아줍니다)
+myWebView.settings.loadWithOverviewMode = true
+myWebView.settings.useWideViewPort = true
+
+// 3. 손가락 확대 기능도 당연히 넣어드립니다!
+myWebView.settings.setSupportZoom(true)
+myWebView.settings.builtInZoomControls = true
+myWebView.settings.displayZoomControls = false // 돋보기 아이콘은 안 보이게 깔끔하게!
+
+
+    </script> 
+
+
+
+</body>
+</html>
