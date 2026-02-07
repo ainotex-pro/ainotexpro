@@ -1,29 +1,14 @@
-const CACHE_NAME = "ainotexpro-cache-v2";
+const CACHE_NAME = "ainotexpro-cache-v1";
 const ASSETS = [
   "/",
-"/index.html",   // 
-  "/login.html",   // 
-  "/main.html",    // 
+  "/index.html",
   "/style.css",
   "/app.js",
   "/manifest.json",
   "/icons/icon-152.png",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
-  "/icons/icon-1024.png",<div class="piano-wrapper">
-        <div class="piano-box">
-            <div class="label">🏛️ GRAND MODE (88)</div>
-            <div class="keys-container" id="pcPiano"></div>
-        </div>
-    </div>
-
-    <div class="piano-wrapper">
-        <div class="piano-box">
-            <div class="label">📱 MOBILE MODE (10)</div>
-            <div class="keys-container" id="mbPiano"></div>
-        </div>
-    </div>
-
+  "/icons/icon-1024.png",
   "/icons/favicon-32.png"
 ];
 
