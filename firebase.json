@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "ai-notex-pro",
+    "site": "ainotex-new",
     "public": ".",
     "ignore": [
       "firebase.json",
