@@ -2,43 +2,27 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ai NoteX Pro - Welcome</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
-
-<link rel="icon" href="./favicon.png" type="image/png">
-
-<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
-
-<link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
-
-<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
-<link rel="manifest" href="./manifest.json">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+    <link rel="manifest" href="./manifest.json">
 
     <style>
-        /* 기본 잡기 */
         body {
             margin: 0; padding: 0; min-height: 100vh;
             font-family: 'Noto Sans KR', sans-serif;
-            background: url('images/hello-bg-1.webp') no-repeat center center fixed;
+            background: #f8f9fa url('images/hello-bg-1.webp') no-repeat center center fixed;
             background-size: cover;
             display: flex; flex-direction: column; align-items: center;
             justify-content: flex-start;
             color: #202124;
         }
-
-        /* 1. 상단 타이틀 섹션 */
-        .header-section {
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .hello-text {
-            font-size: 24px; font-weight: 900; color: #4285F4; margin-bottom: 5px;
-        }
-
+        .header-section { margin-top: 60px; text-align: center; }
+        .hello-text { font-size: 24px; font-weight: 900; color: #4285F4; margin-bottom: 5px; }
         .main-title {
             font-family: 'Libre Baskerville', serif;
             font-size: 48px; font-weight: 900;
@@ -47,39 +31,28 @@
             -webkit-text-fill-color: transparent;
             margin: 0; letter-spacing: -1.5px;
         }
-
-        /* 2.  폰트 구역' */
-        .motto-container {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .motto-text {
-            font-size: 19px; line-height: 1.8; color: #202124; font-weight: 500;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.9); /* 배경 위 가독성 */
-            margin-bottom: 25px;
-        }
-
-        .strong-text {
-            font-size: 22px; line-height: 1.6; color: #202124; font-weight: 900;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
-        }
-
-        /* 3. 버튼 */
+        .motto-container { margin-top: 50px; text-align: center; }
         .main-btn {
-            margin-top: 40px;
-            background-color: #34A853;
-            color: white;
-            padding: 18px 40px;
+            margin-top: 50px;
+            padding: 12px 45px; 
             font-size: 18px;
-            border: none;
-            border-radius: 40px;
-            cursor: pointer;
             font-weight: 900;
-            box-shadow: 0 4px 15px rgba(52, 168, 83, 0.3);
-            transition: 0.3s;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #4285F4, #34A853); 
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
         }
-        .main-btn:hover { transform: scale(1.05); }
+        .main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            background: linear-gradient(45deg, #3b71ca, #2d8e47);
+        }
+        .footer-text { margin-top: 40px; color: #f5f2f2; font-size: 13px; font-weight: 700; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
@@ -92,94 +65,29 @@
         </p>
     </div>
 
-
-        
-
-
-        </div>
-    </div>
- </div>
-<style>
-    /* 그라데이션 버튼 스타일 */
-    .main-btn {
-        margin-top: 50px;
-        /* 높이는 줄이고 좌우로 넓혀서 날렵하게! */
-        padding: 12px 45px; 
-        font-size: 18px;
-        font-weight: 900;
-        color: white;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        
-        /* 은은하고 고급스러운 그라데이션 */
-        background: linear-gradient(45deg, #4285F4, #34A853); 
-        
-        box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
-        transition: all 0.3s ease;
-        display: inline-block;
-        text-decoration: none;
-    }
-
-    /* 마우스를 올리면 더 영롱하게 빛나도록! */
-    .main-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
-        background: linear-gradient(45deg, #3b71ca, #2d8e47);
-    }
-</style>
-
     <div class="motto-container">
-        <img src="google-80.png" width="50" height="50" style="margin-bottom: 20px;"></div>
+        <img src="google-80.png" width="50" height="50" style="margin-bottom: 20px;" onerror="this.style.display='none'">
+        <br>
+        <a href="login.html" class="main-btn">지금 바로 시작하기</a>
+    </div>
 
-<button onclick="location.href='login.html'" class="main-btn">
-    지금 바로 시작하기
-</button>
+    <div class="footer-text">
+        <p>[ 『현재와 미래의 모든 길은 구글로 통한다』 - 나무한그루 정승철 ]</p>
+        <p>[ "All roads, present and future, lead to Google." ] <br> * SC Jeong, Namu-hanguru *</p>
+        <p style="color: #202124; font-size: 16px; font-weight: 900; text-shadow: 1px 1px 0px rgba(255,255,255,0.8);">
+            [ Ai NoteX Pro Beta Test v2.0 ]
+        </p>
+    </div>
 
+    <footer style="margin-top: 40px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.2); text-align: center;">
+        <p style="font-size: 13px; color: #333333; font-weight: 500;">
+            &copy; 2025-2026 <strong>Ai NoteX Pro</strong>. All rights reserved.
+        </p>
+        <p style="font-size: 12px; color: #666666;">
+            Official Service in Inje-gun, Gangwon-do <br>
+            [ "닉네임 - 나무한그루" ] 🌳
+        </p>
+    </footer>
 
-
-</p>
-   <p style="margin-top: 50px; color: #f5f2f2; font-size: 13px; font-weight: 700;">
-        [ 『현재와 미래의 모든 길은 구글로 통한다』 - 나무한그루 정승철 ]
-    </p>
-
-<p style="margin-top: 20px; color: #f5f2f2; font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">
-    [ "All roads, present and future, lead to Google." ] <br>
-                 * SC Jeong, Namu-hanguru *
-</p>
-
-
-    <p style="
-    font-size: 16px; 
-    color: #202124;         /* 아주 깊고 진한 차콜색 */
-    font-weight: 900;       /* 최고 두께로 묵직하게 */
-    margin-top: 40px;       /* 위쪽 버튼들과의 충분한 간격 */
-    letter-spacing: 1px;    /* 글자 사이를 살짝 벌려 전문적인 느낌 */
-    text-align: center;
-    font-family: 'Noto Sans KR', sans-serif;
-    text-shadow: 1px 1px 0px rgba(255,255,255,0.8); /* 글자 뒤에 흰색 그림자를 살짝 줘서 배경과 분리 */
-">
-    [ Ai NoteX Pro Beta Test v2.0 ]
-
-
-<footer style="margin-top: 40px; padding: 20px 0; border-top: 1px solid #eeeeee; text-align: center;">
-    <p style="font-family: 'Malgun Gothic', dotum, sans-serif; 
-              font-size: 13px; 
-              color: #333333 !important; /* 더 짙고 선명한 색상으로 교체 */
-              line-height: 1.6; 
-              font-weight: 500; /* 글자 두께를 살짝 줘서 선명하게 만듦 */
-              letter-spacing: -0.2px;">
-        &copy; 2025-2026 <strong>Ai NoteX Pro</strong>. All rights reserved.
-    </p>
-    <p style="font-size: 12px; color: #666666; margin-top: 5px;">
-        Official Service in Inje-gun, Gangwon-do
-    </p>
-</footer>
-
-<p style="font-size: 0.8rem; color: #525151;">
-    [ "닉네임 - 나무한그루" ]
-</p>
-<span style="font-size: 14px;">🌳</span>
-<div class="final-admin-panel" style="display: none; padding: 15px; background: #fff3f3; border: 2px solid red; margin: 10px;">
 </body>
 </html>
