@@ -14,4 +14,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_NOTEX_PRO }}'
           channelId: live
-          projectId: ai-notex-pro
+          projectId: ai-notexpro  # <--- 사장님, 여기 대시(-)를 뺐습니다!
