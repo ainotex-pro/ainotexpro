@@ -16,4 +16,4 @@ jobs:
           channelId: live
           projectId: ai-notex-pro
           entryPoint: .
-          site: ai-notex-pro
+          target: ai-notex-pro
