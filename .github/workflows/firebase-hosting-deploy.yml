@@ -15,5 +15,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_NOTEX_PRO }}
           channelId: live
           projectId: ai-notex-pro
-          entryPoint: .
+          entryPoint: .  # "창고(public) 찾지 말고 여기서 바로 가져가라!"는 특명입니다.
           target: ai-notex-pro
