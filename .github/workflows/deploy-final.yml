@@ -15,4 +15,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_NOTEX_PRO }}
           channelId: live
           projectId: ai-notex-pro
-          entryPoint: .  # 파일이 바로 여기에 있다는 뜻입니다!
+          entryPoint: .
+          site: ai-notex-pro
