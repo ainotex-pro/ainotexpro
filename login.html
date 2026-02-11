@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Ai NoteX Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+
+<link rel="icon" href="./favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+
+<link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
+
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+    <style>
+        body {
+            margin: 0; padding: 0; min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: url('images/hello-bg-1.webp') no-repeat center center fixed;
+            background-size: cover;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-start;
+        }
+
+        .login-wrapper {
+            width: 90%; max-width: 360px;
+            margin-top: 50px; /* 화면 상단에서의 여백 */
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* 1. 구글 아이콘 설정 */
+        .brand-icon {
+            margin-bottom: -5px; /* 타이틀과 더 밀착시키기 위해 마이너스 여백 사용! */
+        }
+
+        /* 2. 타이틀 설정 (그라데이션 유지) */
+        .brand-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 45px;
+            font-weight: 900;
+            margin: 0; /* 불필요한 마진 제거 */
+            letter-spacing: -1.5px;
+            text-align: center;
+            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #359fea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .intro-text {
+            font-size: 16px; line-height: 1.6; color: #3c4043;
+            margin: 15px 0 30px 0; text-align: center; font-weight: 500;
+        }
+
+        .btn-social {
+            width: 100%; height: 30px; margin-bottom: 12px;
+            border-radius: 12px; border: none;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; cursor: pointer;
+        }
+
+        .google-icon-box {
+            background-color: white; width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 4px; margin-right: 12px;
+        }
+
+        .version-info { font-size: 14px; color: #888; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <h1 class="brand-title">Ai NoteX Pro</h1>
+
+
+    <div class="intro-container">
+        <p class="intro-text">
+                            </p>
+    </div>
+
+    <button class="btn-social" onclick="goToMain('구글')" style="background-color: #4285F4; color: #FFFFFF;">
+        <div class="google-icon-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="width: 18px; height: 18px;">
+        </div>
+        Google 로그인
+    </button>
+
+    <button class="btn-social" onclick="goToMain('카카오')" style="background-color: #FEE500; color: #3E1A1A;">
+        <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" style="width: 24px; height: 24px; margin-right: 10px;">
+        카카오 로그인
+    </button>
+
+    <button class="btn-social" onclick="goToMain('네이버')" style="background-color: #1EC800; color: #FFFFFF;">
+        <img src="https://static.nid.naver.com/oauth/button_g.PNG" style="width: 24px; height: 24px; margin-right: 10px;">
+        네이버 로그인
+    </button>
+
+    <button class="btn-social" onclick="goToMain('애플')" style="background-color: #000000; color: #FFFFFF;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" style="width: 24px; height: 24px; margin-right: 10px; filter: invert(100%);">
+        애플 로그인
+    </button>
+
+    <button class="btn-social" onclick="goToMain('MS')" style="background-color: #0067B8; color: #FFFFFF;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" style="width: 24px; height: 24px; margin-right: 10px;">
+        Microsoft 로그인
+    </button>
+
+<button class="btn-social" onclick="location.href='~.html'" 
+        style="background-color: #E6E6FA; color: #0000CD; border: 2px solid #0000CD; margin-top: 20px; font-size: 13px; transition: 0.3s;">
+    <strong><div style="text-align: center; margin-top: 100px;">
+
+    <h1>🛠️ 현재는 업데이트 중입니다</h1>
+    <p>더 좋은 서비스로 찾아뵙겠습니다. 추후 방문해 주세요.</p>
+</div></strong>
+</button>
+
+</p>
+   <p style="margin-top: 50px; color: #f5f2f2; font-size: 12px; font-weight: 700;">
+        [ 『현재와 미래의 모든 길은 구글로 통한다』 - 나무한그루 정승철 ]
+    </p>
+
+<p style="margin-top: 20px; color: #f5f2f2; font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">
+    [ "All roads, present and future, lead to Google." ] <br>
+                 * SC Jeong, Namu-hanguru *
+</p>
+
+    <p style="
+    font-size: 16px; 
+    color: #202124;         /* 아주 깊고 진한 차콜색 */
+    font-weight: 900;       /* 최고 두께로 묵직하게 */
+    margin-top: 40px;       /* 위쪽 버튼들과의 충분한 간격 */
+    letter-spacing: 1px;    /* 글자 사이를 살짝 벌려 전문적인 느낌 */
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8); /* 글자 뒤에 흰색 그림자를 살짝 줘서 배경과 분리 */
+">
+    [ Ai NoteX Pro Beta Test v2.0 ]
+</p>
+</div>
+
+<footer style="margin-top: 40px; padding: 20px 0; border-top: 1px solid #eeeeee; text-align: center; width: 100%;">
+    <p style="font-family: 'Malgun Gothic', sans-serif; font-size: 13px; color: #333; font-weight: 500;">
+        &copy; 2025-2026 <strong>Ai NoteX Pro</strong>. All rights reserved.
+    </p>
+
+   </p>
+    <p style="font-size: 12px; color: #666666; margin-top: 5px;">
+        Official Service in Inje-gun, Gangwon-do
+    </p>
+</footer>
+
+<script>
+    function goToMain(platform) {
+        alert(platform + " 계정으로 인증을 시작합니다.");
+        setTimeout(function() {
+            location.href = "index.html";
+        }, 1000);
+    }
+</script>
+
+<p style="font-size: 0.8rem; color: #525151;">
+    [ "닉네임 - 나무한그루" ]
+</p>
+<span style="font-size: 14px;">🌳</span>
+<div class="final-admin-panel" style="display: none; padding: 15px; background: #fff3f3; border: 2px solid red; margin: 10px;">
+
+</body>
+</html>
