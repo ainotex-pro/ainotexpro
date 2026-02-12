@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ai NoteX Pro - Welcome</title>
+    <title>Ai NoteX Pro - Search & Welcome</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="./favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
-    <link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
-    <link rel="manifest" href="./manifest.json">
-
     <style>
         body {
             margin: 0; padding: 0; min-height: 100vh;
@@ -21,7 +16,7 @@
             justify-content: flex-start;
             color: #202124;
         }
-        .header-section { margin-top: 60px; text-align: center; }
+        .header-section { margin-top: 60px; text-align: center; width: 100%; }
         .hello-text { font-size: 24px; font-weight: 900; color: #4285F4; margin-bottom: 5px; }
         .main-title {
             font-family: 'Libre Baskerville', serif;
@@ -31,26 +26,23 @@
             -webkit-text-fill-color: transparent;
             margin: 0; letter-spacing: -1.5px;
         }
-        .motto-container { margin-top: 50px; text-align: center; }
-        .main-btn {
-            margin-top: 50px;
-            padding: 12px 45px; 
-            font-size: 18px;
-            font-weight: 900;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            background: linear-gradient(45deg, #4285F4, #34A853); 
-            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
+        /* 구글 검색창 컨테이너 */
+        .search-container {
+            width: 90%;
+            max-width: 650px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .main-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
-            background: linear-gradient(45deg, #3b71ca, #2d8e47);
+        .motto-container { text-align: center; margin-top: 20px; }
+        .main-btn {
+            padding: 12px 45px; font-size: 18px; font-weight: 900;
+            color: white; border: none; border-radius: 50px; cursor: pointer;
+            background: linear-gradient(45deg, #4285F4, #34A853);
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease; text-decoration: none; display: inline-block;
         }
         .footer-text { margin-top: 40px; color: #f5f2f2; font-size: 13px; font-weight: 700; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
     </style>
@@ -65,9 +57,22 @@
         </p>
     </div>
 
+<div class="search-container" style="min-height: 100px;">
+    <script>
+      (function() {
+        var cx = '5741a7f300de74f50';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+    <div class="gcse-search"></div>
+</div>
+
     <div class="motto-container">
-        
-        <br>
         <a href="login.html" class="main-btn">지금 바로 시작하기</a>
     </div>
 
@@ -78,16 +83,6 @@
             [ Ai NoteX Pro Beta Test v2.0 ]
         </p>
     </div>
-
-    <footer style="margin-top: 40px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.2); text-align: center;">
-        <p style="font-size: 13px; color: #333333; font-weight: 500;">
-            &copy; 2025-2026 <strong>Ai NoteX Pro</strong>. All rights reserved.
-        </p>
-        <p style="font-size: 12px; color: #666666;">
-            Official Service in Inje-gun, Gangwon-do <br>
-            [ "닉네임 - 나무한그루" ] 🌳
-        </p>
-    </footer>
 
 </body>
 </html>
