@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai NoteX Pro - 나무한그루 정승철의 혁신 노트</title>
+    
+    <meta name="description" content="Ai NoteX Pro: 정승철(나무한그루)이 제안하는 지능형 메모 플랫폼. 강력한 구글 검색 엔진 연동으로 모든 지식을 기록하고 관리하세요.">
+    <meta name="keywords" content="Ai NoteX Pro, 정승철, 나무한그루, AI노트, 구글검색, PWA, 인제군, 지식관리">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --main-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; }
+        body { margin: 0; font-family: 'Noto Sans KR', sans-serif; background: #fff url('images/hello-bg-1.webp') no-repeat center center fixed; background-size: cover; color: #333; }
+        
+        .overlay { background: rgba(255, 255, 255, 0.85); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; }
+        
+        /* 헤더 섹션 */
+        .header { text-align: center; margin-bottom: 30px; }
+        .brand { font-family: 'Libre Baskerville', serif; font-size: 56px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* 🔍 검색 섹션 */
+        .search-area { width: 100%; max-width: 700px; margin: 20px 0; background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .search-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--main-blue); text-align: center; }
+
+        /* 📝 기능 소개 섹션 (구글 로봇이 좋아하는 텍스트) */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 900px; margin-top: 40px; }
+        .feature-card { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--main-blue); }
+        .feature-card h3 { font-size: 20px; margin-bottom: 10px; color: #222; }
+        .feature-card p { font-size: 14px; line-height: 1.6; color: #666; }
+
+        .btn-start { margin-top: 40px; padding: 18px 60px; font-size: 20px; font-weight: 900; color: #fff; background: linear-gradient(45deg, var(--main-blue), #1a73e8); border-radius: 50px; text-decoration: none; box-shadow: 0 10px 20px rgba(66, 133, 244, 0.4); transition: 0.3s; }
+        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(66, 133, 244, 0.5); }
+
+        .motto-footer { margin-top: auto; padding-top: 50px; text-align: center; font-weight: 500; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="header">
+            <div style="font-size: 20px; font-weight: 900; color: var(--main-blue);">Hello! Welcome to</div>
+            <h1 class="brand">Ai NoteX Pro</h1>
+            <p style="letter-spacing: 3px; font-weight: 700; color: #777;">SMART KNOWLEDGE PLATFORM</p>
+        </div>
+
+
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>✍️[기능 1] 스마트 메모 엔진</h3>
+                <p>생각나는 즉시 기록하고 체계적으로 분류하는 차세대 메모 시스템입니다. 당신의 아이디어를 잊지 않게 돕습니다.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌍[기능 2] 구글 기능 바로가기 </h3>
+                <p>모바일과 PC에서, 구글의 핵심 서비스를 단 하나의 플랫폼에서 실행되게 구현했습니다<br>
+ 
+Google Gemin<br>
+Google photo<br>
+Google Docs<br>
+Google Search<br>
+Gemin Drive<br>
+.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 PWA 응용 프로그램 설명</h3>
+                <p>설치 없이 웹에서 바로 실행되는 PWA 기술로 스마트폰과 PC 어디서든 동일한 환경의 노트를 경험할 수 있습니다.</p>
+            </div>
+        </div>
+
+        <a href="main2.html" class="btn-start">지금 바로 시작하기</a>
+
+        <div class="motto-footer">
+            <p style="font-size: 18px; color: #222;">[ 『현재와 미래의 모든 길은 구글로 통한다』 ]</p>
+            <p style="font-size: 14px;">- 나무한그루 · 정승철 -</p>
+            <p style="margin-top: 15px; font-size: 12px; color: #999;">© 2026 Ai NoteX Pro. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
