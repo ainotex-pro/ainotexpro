@@ -16,34 +16,34 @@
         
         /* 헤더 섹션 */
         .header { text-align: center; margin-bottom: 25px; }
-        .brand { font-family: 'Libre Baskerville', serif; font-size: 38px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
+        .brand { font-family: 'Libre Baskerville', serif; font-size: 27px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
         
         /* 기능 소개 섹션 */
         .features { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 12px; }
         .feature-card { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--gemini-purple); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .feature-card h3 { font-size: 19px; margin-bottom: 10px; color: #222; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .feature-card p { font-size: 14px; line-height: 1.6; color: #555; margin: 4px 0; }
+        .feature-card h3 { font-size: 15px; margin-bottom: 7px; color: #222; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .feature-card p { font-size: 15px; line-height: 1.5; color: #555; margin: 4px 0; }
         .eng-text { font-style: italic; color: #888; font-size: 13px; margin-top: 5px; }
 
         /* 버튼 간격 조정: margin-top을 40px -> 20px로 축소 */
-        .btn-start { margin-top: 25px; padding: 16px 50px; font-size: 19px; font-weight: 900; color: #fff; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple)); border-radius: 50px; text-decoration: none; box-shadow: 0 8px 20px rgba(142, 117, 255, 0.3); transition: 0.3s; display: inline-block; }
+        .btn-start { margin-top: 20px; padding: 16px 50px; font-size: 14px; font-weight: 900; color: #fff; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple)); border-radius: 50px; text-decoration: none; box-shadow: 0 8px 20px rgba(142, 117, 255, 0.3); transition: 0.3s; display: inline-block; }
         .btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(142, 117, 255, 0.4); }
 
         /* 푸터 간격 조정: margin-top: auto 대신 수치 부여 */
-        .motto-footer { margin-top: 30px; text-align: center; font-weight: 500; color: #555; }
+        .motto-footer { margin-top: 20px; text-align: center; font-weight: 500; color: #555; }
     </style>
 </head>
 <body>
     <div class="overlay">
         <div class="header">
 
-            <h1 class="brand">Google Gemini Search</h1>
+            <h4 class="brand">Google Gemini Search</h4>
             <p style="letter-spacing: 2px; font-weight: 700; color: #888; font-size: 12px; margin-top: 5px;">NEXT-GEN SEARCH PLATFORM</p>
         </div>
 
         <div class="features">
             <div class="feature-card">
-                <h3>🔍 AI-Powered Search</h3>
+                <h2>AI-Powered Search</h2>
                 <p>구글 제미나이 엔진을 통해 단순 검색을 넘어 정답을 찾아내는 지능형 검색 경험을 제공합니다.</p>
                 <p class="eng-text">"Goes beyond simple search to deliver intelligent answers through the Google Gemini engine."</p>
             </div>
@@ -51,7 +51,8 @@
         
 <a href="main.html" class="btn-start">Google Gemini Search</a>
 
-        <div class="motto-footer">               
+        
+<div class="motto-footer">               
             <div style="font-size: 18px; font-weight: 900; color: var(--gemini-purple); letter-spacing: 1px; margin-bottom: 15px;">AI NOTEX PRO</div>
         
 <div style="text-align: center;">
