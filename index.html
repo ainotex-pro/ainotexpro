@@ -3,71 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ai NoteX Pro - 나무한그루 정승철의 혁신 노트</title>
+    <title>Google Gemini Search - 차세대 지능형 검색 플랫폼</title>
     
-    <meta name="description" content="Ai NoteX Pro: 정승철(나무한그루)이 제안하는 지능형 메모 플랫폼. 강력한 구글 검색 엔진 연동으로 모든 지식을 기록하고 관리하세요.">
-    <meta name="keywords" content="Ai NoteX Pro, 정승철, 나무한그루, AI노트, 구글검색, PWA, 인제군, 지식관리">
+    <meta name="description" content="Google Gemini Search: 정승철(나무한그루)이 제안하는 GEO 기반 검색 최적화 플랫폼. 구글 제미나이 AI와 검색 엔진의 완벽한 조화.">
     
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --main-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; }
+        :root { --main-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; --gemini-purple: #8E75FF; }
         body { margin: 0; font-family: 'Noto Sans KR', sans-serif; background: #fff url('images/hello-bg-1.webp') no-repeat center center fixed; background-size: cover; color: #333; }
         
-        .overlay { background: rgba(255, 255, 255, 0.85); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; box-sizing: border-box; }
+        .overlay { background: rgba(255, 255, 255, 0.88); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 30px 20px; box-sizing: border-box; }
         
         /* 헤더 섹션 */
-        .header { text-align: center; margin-bottom: 30px; }
-        .brand { font-family: 'Libre Baskerville', serif; font-size: 37px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .brand { font-family: 'Libre Baskerville', serif; font-size: 38px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
         
+        /* 기능 소개 섹션 */
+        .features { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 12px; }
+        .feature-card { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--gemini-purple); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .feature-card h3 { font-size: 19px; margin-bottom: 10px; color: #222; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .feature-card p { font-size: 14px; line-height: 1.6; color: #555; margin: 4px 0; }
+        .eng-text { font-style: italic; color: #888; font-size: 13px; margin-top: 5px; }
 
-        /* 📝 기능 소개 섹션 (구글 로봇이 텍스트) */
+        /* 버튼 간격 조정: margin-top을 40px -> 20px로 축소 */
+        .btn-start { margin-top: 25px; padding: 16px 50px; font-size: 19px; font-weight: 900; color: #fff; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple)); border-radius: 50px; text-decoration: none; box-shadow: 0 8px 20px rgba(142, 117, 255, 0.3); transition: 0.3s; display: inline-block; }
+        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(142, 117, 255, 0.4); }
 
-        .feature-card { background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--main-blue); }
-        .feature-card h3 { font-size: 20px; margin-bottom: 10px; color: #222; }
-        .feature-card p { font-size: 14px; line-height: 1.6; color: #666; }
-
-        .btn-start { margin-top: 40px; padding: 18px 60px; font-size: 20px; font-weight: 900; color: #fff; background: linear-gradient(45deg, var(--main-blue), #1a73e8); border-radius: 50px; text-decoration: none; box-shadow: 0 10px 20px rgba(66, 133, 244, 0.4); transition: 0.3s; }
-        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(66, 133, 244, 0.5); }
-
-        .motto-footer { margin-top: auto; padding-top: 50px; text-align: center; font-weight: 500; color: #555; }
+        /* 푸터 간격 조정: margin-top: auto 대신 수치 부여 */
+        .motto-footer { margin-top: 30px; text-align: center; font-weight: 500; color: #555; }
     </style>
 </head>
 <body>
     <div class="overlay">
         <div class="header">
-            <div style="font-size: 20px; font-weight: 900; color: var(--main-blue);">Hello! Welcome to</div>
-            <h1 class="brand">Ai NoteX Pro</h1>
-            <p style="letter-spacing: 3px; font-weight: 700; color: #777;">SMART KNOWLEDGE PLATFORM</p>
+            <div style="font-size: 16px; font-weight: 900; color: var(--gemini-purple); letter-spacing: 1px;">The Future of Intelligence</div>
+            <h1 class="brand">Google Gemini Search</h1>
+            <p style="letter-spacing: 2px; font-weight: 700; color: #888; font-size: 12px; margin-top: 5px;">NEXT-GEN SEARCH PLATFORM</p>
         </div>
 
         <div class="features">
             <div class="feature-card">
-                <h3>✍️ 스마트 메모 엔진</h3>
-                <p>생각나는 즉시 기록하고 체계적으로 분류하는 차세대 메모 시스템입니다. 당신의 아이디어를 잊지 않게 돕습니다.</p>
+                <h3>🔍 AI-Powered Search</h3>
+                <p>구글 제미나이 엔진을 통해 단순 검색을 넘어 정답을 찾아내는 지능형 검색 경험을 제공합니다.</p>
+                <p class="eng-text">"Goes beyond simple search to deliver intelligent answers through the Google Gemini engine."</p>
             </div>
-            <div class="feature-card">
-                <h3>🌍 구글 기능 바로가기 </h3>
-                <p>모바일과 PC에서, 구글의 핵심 서비스를 단 하나의 플랫폼에서 실행되게 구현했습니다<br>
- 
-Google Gemin / Google photo<br>
-Google Docs / Google Search<br>
-Gemin Drive<br>
+        </div>
+        
+<a href="main.html" class="btn-start">Google Gemini Search</a>
+
+        <div class="motto-footer">               
+            <div style="font-size: 18px; font-weight: 900; color: var(--gemini-purple); letter-spacing: 1px; margin-bottom: 15px;">AI NOTEX PRO</div>
+        
+<div style="text-align: center;">
+<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
+<p style="font-size: 0.8rem; color: #525151;">
+    [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
+
+<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
+<p style="font-size: 0.8rem; color: #525151;">
+    [ "현재와 미래의 모든 길은 구글로 통한다" - 정승철 ]
 </p>
-            </div>
-            <div class="feature-card">
-                <h3>📱 PWA 응용 프로그램 설명</h3>
-                <p>설치 없이 웹에서 바로 실행되는 PWA 기술로 스마트폰과 PC 어디서든 동일한 환경의 노트를 경험할 수 있습니다.</p>
-            </div>
-        </div>
 
-        <a href="main-v1.html" class="btn-start">지금 바로 시작하기</a>
-
-        <div class="motto-footer">
-            <p style="font-size: 16px; color: #222;">『현재와 미래의 모든 길은 구글로 통한다』</p>
-            <p style="font-size: 14px;">- 나무한그루  -</p>
-<p style="font-size: 14px; color: #222;">[ "All roads, present and future, lead to Google." ] <br> * SC Jeong, Namu-hanguru *</p>
-            <p style="margin-top: 15px; font-size: 12px; color: #999;">© 2026 Ai NoteX Pro. All Rights Reserved.</p>
-        </div>
+<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
+<p style="font-size: 0.8rem; color: #525151;">
+    [ "All roads, present and future, lead to Google." ]<br>
+Jeong Seung-cheol
+</p></div>
     </div>
 </body>
 </html>
