@@ -19,7 +19,7 @@
             --gold-border: #D4AF37;
         }
 
-        /* 1. 배경 설정: 사장님의 이미지를 최우선으로 적용 */
+        /* 1. 배경 설정: 이미지를 최우선으로 적용 */
         body { 
             margin: 0; padding: 0;
             background: url('images/main-bg-1.webp') no-repeat center center fixed; 
@@ -43,7 +43,7 @@
             display: flex; align-items: center; justify-content: center; 
             background: rgba(255, 255, 255, 0.9); 
             border: 2px solid #FFFACD; padding: 10px 20px;
-            margin: 60px auto 20px auto; width: 85%; max-width: 600px;
+            margin: 55px auto 20px auto; width: 85%; max-width: 600px;
             border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .header-text { 
@@ -68,7 +68,7 @@
             display: flex; align-items: center; justify-content: center; margin-right: 8px;
         }
 
-        /* 5. 메인 리스트 버튼 (사장님의 골드 스타일) */
+        /* 5. 메인 리스트 버튼 (골드 스타일) */
         .main-list-btn {
             display: flex; align-items: center; width: 90%; max-width: 500px; height: 42px;
             margin: 10px auto; padding: 0 20px;
@@ -144,11 +144,10 @@ function changeLang(lang) {
             </svg>
 
 
-    <span style="flex-grow: 1; text-align: left;"> Google Search</span>
+ <span style="flex-grow: 1; text-align: center;">Google Search</span>
     
     <span style="color: #666; font-size: 16px; font-weight: bold;">➔</span>
 </a>
-</div>
 
 <a href="https://gemini.google.com" target="_blank"  
    onmouseover="this.style.boxShadow='0 0 25px rgba(255, 223, 0, 0.6), 0 8px 20px rgba(0,0,0,0.15)'; this.style.transform='translateY(-3px)';"  
@@ -167,19 +166,19 @@ function changeLang(lang) {
           cursor: pointer; 
           box-sizing: border-box;">
     
-            <svg viewBox="0 0 24 24" width="16" height="16">
-                <path d="M9.42 5.21L15.37 15.5H3.46l5.96-10.29z" fill="#0066da"/>
-                <path d="M14.58 5.21l5.96 10.29-5.96 10.29L8.62 15.5l5.96-10.29z" fill="#00ac47"/>
-                <path d="M15.37 15.5l-5.96 10.29H21.3l-5.93-10.29z" fill="#ffba00"/>
-                <path d="M14.58 5.21L8.62 15.5 3.46 5.21h11.12z" fill="#00832d"/>
-            </svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right: 15px; flex-shrink: 0;">
+        <defs>
+            <linearGradient id="gemini-final" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF5252" /><stop offset="33%" style="stop-color:#FFD600" /><stop offset="66%" style="stop-color:#00C853" /><stop offset="100%" style="stop-color:#448AFF" />
+            </linearGradient>
+        </defs>
+        <path fill="url(#gemini-final)" d="M12,2L14.43,8.71L21.14,11.14L14.43,13.57L12,20.28L9.57,13.57L2.86,11.14L9.57,8.71L12,2Z"/>
+    </svg>
 
-
-    <span style="flex-grow: 1; text-align: left;">Google Gemini </span>
+    <span style="flex-grow: 1; text-align: center;">Google Gemini</span>
     
     <span style="color: #666; font-size: 16px; font-weight: bold;">➔</span>
 </a>
-
 
 <div style="text-align: center;">
 <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">

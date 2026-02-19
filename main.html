@@ -43,7 +43,7 @@
             display: flex; align-items: center; justify-content: center; 
             background: rgba(255, 255, 255, 0.9); 
             border: 2px solid #FFFACD; padding: 10px 20px;
-            margin: 60px auto 20px auto; width: 85%; max-width: 600px;
+            margin: 55px auto 20px auto; width: 85%; max-width: 600px;
             border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .header-text { 
@@ -68,7 +68,7 @@
             display: flex; align-items: center; justify-content: center; margin-right: 8px;
         }
 
-        /* 5. 메인 리스트 버튼 (사장님의 골드 스타일) */
+        /* 5. 메인 리스트 버튼 (골드 스타일) */
         .main-list-btn {
             display: flex; align-items: center; width: 90%; max-width: 500px; height: 42px;
             margin: 10px auto; padding: 0 20px;
@@ -122,8 +122,6 @@ function changeLang(lang) {
 
 </div>
 
-</div>
-
 <a href="https://www.google.com" target="_blank"  
    onmouseover="this.style.boxShadow='0 0 25px rgba(255, 223, 0, 0.6), 0 8px 20px rgba(0,0,0,0.15)'; this.style.transform='translateY(-3px)';"  
    onmouseout="this.style.boxShadow='0 0 10px rgba(255,215,0,0.4)'; this.style.transform='translateY(0)';"
@@ -146,16 +144,13 @@ function changeLang(lang) {
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
+</svg>
 
 
-    <span style="flex-grow: 1; text-align: left;"> Google 검색 바로가기</span>
+    <span style="flex-grow: 1; text-align: center;">Google 검색 바로가기</span>
     
     <span style="color: #666; font-size: 16px; font-weight: bold;">➔</span>
 </a>
-
-
-
- 
 
 <a href="https://gemini.google.com" target="_blank"  
    onmouseover="this.style.boxShadow='0 0 25px rgba(255, 223, 0, 0.6), 0 8px 20px rgba(0,0,0,0.15)'; this.style.transform='translateY(-3px)';"  
@@ -174,15 +169,18 @@ function changeLang(lang) {
           cursor: pointer; 
           box-sizing: border-box;">
     
-            <svg viewBox="0 0 24 24" width="16" height="16">
-                <path d="M9.42 5.21L15.37 15.5H3.46l5.96-10.29z" fill="#0066da"/>
-                <path d="M14.58 5.21l5.96 10.29-5.96 10.29L8.62 15.5l5.96-10.29z" fill="#00ac47"/>
-                <path d="M15.37 15.5l-5.96 10.29H21.3l-5.93-10.29z" fill="#ffba00"/>
-                <path d="M14.58 5.21L8.62 15.5 3.46 5.21h11.12z" fill="#00832d"/>
+            <svg width="18" height="18" viewBox="0 0 24 24">
+                <defs>
+                    <linearGradient id="gemini-final" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF5252" /><stop offset="33%" style="stop-color:#FFD600" /><stop offset="66%" style="stop-color:#00C853" /><stop offset="100%" style="stop-color:#448AFF" />
+                    </linearGradient>
+                </defs>
+                <path fill="url(#gemini-final)" d="M12,2L14.43,8.71L21.14,11.14L14.43,13.57L12,20.28L9.57,13.57L2.86,11.14L9.57,8.71L12,2Z"/>
             </svg>
 
 
-    <span style="flex-grow: 1; text-align: left;">Google Gemini 바로가기</span>
+    <span style="flex-grow: 1; text-align: center;">Google Gemini 바로가기</span>
+
     
     <span style="color: #666; font-size: 16px; font-weight: bold;">➔</span>
 </a>
