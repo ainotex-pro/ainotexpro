@@ -21,6 +21,12 @@
         .input-box { background: #f9f9f9; padding: 10px; border-radius: 10px; }
         input { width: 80%; border: 1px solid #ccc; text-align: center; font-size: 16px; padding: 5px; border-radius: 5px; }
         label { display: block; font-size: 11px; color: #666; margin-bottom: 5px; }
+    /* PC 반응형 2열 */
+    @media(min-width:768px){
+      .action-row { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+      .action-btn { width:45%; margin:5px; }
+    }
+  
     </style>
 </head>
 <body>
@@ -53,7 +59,7 @@
         <div class="input-box"><label>8. 기타</label><input type="number" oninput="updateBar(8, this.value)"></div>
     </div>
 
-    <p style="font-size: 12px; color: #bdc3c7; margin-top: 20px;">Ai NoteX Pro Version 2.0 </p>
+    
 </div>
 
 <script>
