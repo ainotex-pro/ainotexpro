@@ -2,160 +2,214 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Google Gemini Search - AiNoteX Pro</title>
-    <meta name="theme-color" content="#000000">
-    
-    <link rel="icon" href="./favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Libre+Baskerville:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiNoteX Pro | Google Gemini Hub</title>
     <style>
-        :root {
-            --google-blue: #4285F4;
-            --google-green: #34A853;
-            --google-yellow: #FBBC05;
-            --google-red: #EA4335;
-            --gold-border: #D4AF37;
+        /* 1. 기본 비즈니스 레이아웃 */
+        body { background: #f8f9fa; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        
+        .header-box { background: white; border: 1.5px solid; border-image: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335) 1; padding: 15px; width: 100%; max-width: 700px; text-align: center; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .google-text { color: #4285F4; font-weight: 800; font-size: 20px; }
+        .ainotex-text { color: #34A853; font-weight: 800; font-size: 20px; }
+
+        .search-container { width: 100%; max-width: 600px; display: flex; background: white; border-radius: 30px; padding: 5px 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .search-container input { flex: 1; border: none; outline: none; padding: 12px; font-size: 16px; }
+        .search-btn { background: #4285F4; color: white; border: none; padding: 8px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+
+        /* 2. 사령관님의 핵심 지시사항: PC/모바일 반응형 그리드 */
+        .square-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 모바일 기본: 2열 정렬 */
+            gap: 15px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-bottom: 25px; 
         }
 
-        /* 1. 배경 설정: 이미지를 최우선으로 적용 */
-        body { 
-            margin: 0; padding: 0;
-            background: url('images/main-bg-1.webp') no-repeat center center fixed; 
-            background-size: cover;
-            font-family: 'Noto Sans KR', sans-serif;
-            min-height: 100vh;
+        /* PC 화면 반응형 (768px 이상일 때) */
+        @media(min-width: 768px) {
+            .square-grid { 
+                grid-template-columns: repeat(4, 1fr); /* PC에서는 4열로 확장 */
+                gap: 20px;
+            }
         }
 
-        /* 2. 언어 선택 버튼 */
-        .lang-control {
-            position: absolute; top: 15px; right: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 5px 12px; border-radius: 20px;
-            font-size: 12px; font-weight: bold;
-        }
-        .lang-btn { background: none; border: none; cursor: pointer; color: #555; font-weight: 900; }
-        .lang-divider { margin: 0 5px; color: #ccc; }
+        .sq-btn { background: white; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; border-radius: 15px; border: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; }
+        .sq-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .sq-btn img { width: 35px; margin-bottom: 10px; }
+        .sq-btn span { font-size: 13px; color: #333; font-weight: 600; }
 
-        /* 3. 헤더 박스 스타일 */
-        .header-bar { 
-            display: flex; align-items: center; justify-content: center; 
-            background: rgba(255, 255, 255, 0.9); 
-            border: 2px solid #FFFACD; padding: 10px 20px;
-            margin: 55px auto 20px auto; width: 85%; max-width: 600px;
-            border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .header-text { 
-            font-size: 20px; font-weight: 900; 
-            background: linear-gradient(45deg, var(--google-blue), var(--google-green));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        /* 3. 태그 버튼 섹션 */
+        .tag-container { text-align: center; max-width: 600px; margin-bottom: 20px; }
+        .tag-btn { background: #e9ecef; color: #495057; border: none; padding: 10px 18px; border-radius: 25px; font-weight: 600; font-size: 13px; cursor: pointer; margin: 5px; }
 
-        /* 4. 구글 상단 바로가기 (2열 그리드) */
-        .top-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            width: 90%; max-width: 500px; margin: 0 auto 15px auto;
-        }
-        .top-link {
-            display: flex; align-items: center; height: 48px; padding: 0 12px;
-            background-color: var(--google-blue); border-radius: 12px;
-            color: #fff; font-size: 13px; font-weight: 600; text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s;
-        }
-        .icon-circle {
-            width: 28px; height: 28px; background: #fff; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin-right: 8px;
-        }
-
-        /* 5. 메인 리스트 버튼 (골드 스타일) */
-        .main-list-btn {
-            display: flex; align-items: center; width: 90%; max-width: 500px; height: 42px;
-            margin: 10px auto; padding: 0 20px;
-            background: linear-gradient(90deg, #fff9c4 0%, #dcedc8 30%, #b3e5fc 70%, #f1f8e9 100%);
-            border: 2px solid var(--gold-border); border-radius: 24px;
-            color: #2c3e50; font-size: 14px; font-weight: 700; text-decoration: none;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(255,215,0,0.2);
-            box-sizing: border-box;
-        }
-        .main-list-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 223, 0, 0.4);
-        }
-        .main-list-btn img, .main-list-btn svg { margin-right: 12px; flex-shrink: 0; }
-        .btn-arrow { margin-left: auto; color: #888; }
-
-        /* 하단 관리자 버튼 */
-        .admin-link { position: fixed; bottom: 10px; right: 10px; color: #ccc; font-size: 11px; cursor: pointer; text-decoration: none; }
-
-
+        /* 4. 내부 결과 출력 섹션 */
+        #search-result-area { display: none; width: 100%; max-width: 850px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 25px; border: 1px solid #e0e0e0; }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 12px; }
     </style>
-
-<script>
-// [main.html 전용 언어 전환 스위치]
-function changeLang(lang) {
-    if (lang === 'KR') {
-        // 이미 한글판이니 새로고침만 하거나 main.html로 이동
-        location.href = 'main.html'; 
-    } else {
-        // 영어 버튼을 누르면 영문판(mainen.html)으로 정밀 도약!
-        location.href = 'mainen.html';
-    }
-}
-
-</script>
-
 </head>
 <body>
 
-<div class="lang-control">
-    <button class="lang-btn" onclick="changeLang('KR')">KR</button>
-    <span class="lang-divider">/</span>
-    <button class="lang-btn" onclick="changeLang('EN')">EN</button>
+    <div class="header-box">
+        <div class="header-content">
+            <span class="google-text">Google Gemini Search</span> | <span class="ainotex-text">Ai NoteX Pro</span>
+        </div>
+    </div>
+
+
+
+    <div class="search-container">
+        <input type="text" id="geminiSearch" placeholder="검색어나 키워드를 입력하세요">
+        <button onclick="executeSearch()" class="search-btn">검색</button>
+    </div>
+
+<style>
+    /* 1/4 크기로 줄인 마이크로 버튼 그리드 */
+    .mini-utility-bar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto 20px auto;
+    }
+
+    .mini-sq-btn {
+        flex: 1; /* 4개가 공평하게 공간 나눠 갖기 */
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #eee;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 0; /* 높이를 확 줄임 */
+        text-decoration: none;
+        transition: 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .mini-sq-btn:hover {
+        background: #fff;
+        transform: translateY(-2px);
+    }
+
+    /* 아이콘 크기를 기존의 1/4 수준(약 18~20px)으로 조절 */
+    .mini-sq-btn img {
+        width: 20px; 
+        height: 20px;
+        margin-bottom: 3px;
+    }
+
+    /* 텍스트도 아주 작고 깔끔하게 */
+    .mini-sq-btn span {
+        font-size: 10px;
+        color: #666;
+        font-weight: 700;
+    }
+</style>
+
+<div class="mini-utility-bar">
+    <a href="https://mail.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg">
+        <span>메일</span>
+    </a>
+    <a href="https://calendar.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg">
+        <span>달력</span>
+    </a>
+    <a href="https://drive.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg">
+        <span>드라이브</span>
+    </a>
+    <a href="https://docs.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Google_Docs_logo_%282014-2020%29.svg">
+        <span>구글문서</span>
+    </a>
 </div>
 
-<div class="header-bar">
-    <img src="icons/google.png" style="width: 30px; height: 30px; margin-right: 12px;" onerror="this.src='https://www.google.com/favicon.ico'">
-    <span class="header-text">Google Gemini Search</span>
+******************************************************************
+<div class="mini-utility-bar">
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
 </div>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 95%; max-width: 600px; margin: 15px auto;">
-
-</div>
-
-
-
-
-
-</a><div style="text-align: center;">
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.8rem; color: #525151;">
-    [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
-
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.8rem; color: #525151;">
-    [ "현재와 미래의 모든 길은 구글로 통한다" - 정승철 ]
-</p>
-
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.8rem; color: #525151;">
-    [ "All roads, present and future, lead to Google." ]<br>
-Jeong Seung-cheol
-</p>
-
-
+******************************************************************
+<div class="mini-utility-bar">
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
 </div>
 
-<div style="margin-top: 20px; text-align: center;">
-    <p style="font-size: 11px; color: #888; line-height: 1.6; font-weight: 500;">
-        본 서비스는 구글 각 기능 바로가기 및 API 연동 허브로서,<br>
-        모든 개인정보 보호 및 데이터 처리는 
-        <a href="https://policies.google.com/privacy?hl=ko" target="_blank" style="color: #4285F4; text-decoration: underline;">Google 개인정보처리방침</a>에 따릅니다.
-    </p>
-</div>
 
+
+
+
+    <div id="search-result-area">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <strong style="color:#4285F4;">🔍 검색 결과</strong>
+            <button onclick="closeResult()" style="cursor:pointer; border:none; background:#f8f9fa; border-radius:8px; padding:5px 15px; font-size:13px; font-weight:bold;">닫기</button>
+        </div>
+        <iframe id="search-iframe"></iframe>
+    </div>
+
+    <script>
+        function fillSearch(k) { document.getElementById('geminiSearch').value = k; executeSearch(); }
+        function closeResult() { document.getElementById('search-result-area').style.display = 'none'; }
+        
+        function executeSearch() {
+            const q = document.getElementById('geminiSearch').value;
+            const area = document.getElementById('search-result-area');
+            const ifr = document.getElementById('search-iframe');
+            if(q.trim() !== "") {
+                area.style.display = "block";
+                ifr.src = "https://www.google.com/search?q=" + encodeURIComponent(q) + "&igu=1";
+                area.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+    
+
+<style>
+    /* 태그를 훨씬 작고 방해되지 않게 만드는 스타일 */
+    .mini-tag {
+        background: none;
+        border: none;
+        color: #4285F4;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-right: 5px;
+        padding: 2px 5px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+    .mini-tag:hover {
+        background: #e3f2fd;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="sub-menu" style="display:flex; gap:10px; margin-bottom:10px;">
+    </div>
+
+    <div class="footer-section">
+        <hr>
+        <p>[ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]</p>
+        <hr>
+        <p>[ "현재와 미래의 모든 길은 구글로 통한다" - 정승철 ]</p>
+        <hr>
+        <p>[ "All roads, present and future, lead to Google." ]<br>Jeong Seung-cheol</p>
+        
+        <div style="margin-top: 20px;">
+            <p style="font-size: 11px; color: #888; line-height: 1.6;">
+                본 서비스는 구글 각 기능 바로가기 및 API 연동 허브로서,<br>
+                모든 개인정보 보호 및 데이터 처리는 <a href="https://policies.google.com/privacy?hl=ko" target="_blank" style="color: var(--google-blue);">Google 개인정보처리방침</a>에 따릅니다.
+            </p>
+        </div>
+    </div>
 
 </body>
-
-
 </html>
-
