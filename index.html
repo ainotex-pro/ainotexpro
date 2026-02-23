@@ -70,12 +70,130 @@
         </div>
     </div>
 
-
+<div id="beta-notice" style="background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); color: white; padding: 12px; text-align: center; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.2);">
+    <div style="font-weight: 900; font-size: 12px; letter-spacing: 1px;">
+        FREE ACCESS | BETA TEST PERIOD
+    </div>
+    <div style="font-size: 12px; margin-top: 4px; opacity: 0.9;">
+        현재 <strong>베타 테스트 기간</strong>으로 모든 기능을 제한 없이 <strong>무료</strong>로 이용하실 수 있습니다.
+    </div>
+</div>
 
     <div class="search-container">
         <input type="text" id="geminiSearch" placeholder="검색어나 키워드를 입력하세요">
         <button onclick="executeSearch()" class="search-btn">검색</button>
     </div>
+
+<div id="workspace-container" style="max-width: 800px; margin: 30px auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box;">
+    
+    <textarea id="document-input" 
+        placeholder="PASTE YOUR CONTENT HERE FOR PDF/PPT GENERATION / PDF/PPT 생성을 위해 여기에 내용을 붙여넣으세요......... 지금은 현재 업데이트 중입니다 " 
+        style="width: 100%; max-width: 800px; height: 250px; padding: 15px; border-radius: 12px; border: 2px solid #eee; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; resize: vertical; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
+        onfocus="this.style.borderColor='#4285F4'"
+        onblur="this.style.borderColor='#eee'"></textarea>
+
+    <div style="display: flex; gap: 10px; margin-top: 15px; width: 100%; max-width: 800px;">
+        <button onclick="exportToPDF()" style="flex: 1; padding: 12px; background: #86c296; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px; letter-spacing: 1px; transition: 0.3s;">
+            EXPORT PDF
+        </button>
+        <button onclick="generatePPT()" style="flex: 1; padding: 12px; background: #587cb8; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px; letter-spacing: 1px; transition: 0.3s;">
+            GENERATE PPT
+        </button>
+    </div>
+    
+    <p style="text-align: center; font-size: 11px; color: #aaa; margin-top: 10px; letter-spacing: 0.5px; width: 100%;">
+        POWERED BY AINOTEX PRO DOCUMENT ENGINE V3
+    </p>
+</div>
+
+
+
+
+
+
+<script>
+    // 2. PDF EXPORT 로직
+    function exportToPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const content = document.getElementById('document-input').value;
+
+        if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
+            alert("Please enter the content to export!");
+            return;
+        }
+
+        // PDF 생성 및 저장
+        doc.setFontSize(12);
+        // 기본 폰트는 영문 위주이며, 한글 출력을 위해서는 추후 폰트 이식이 필요할 수 있습니다.
+        doc.text(content, 10, 10, { maxWidth: 180 });
+        doc.save("AiNoteX_Pro_Document.pdf");
+    }
+
+    // 3. PPT GENERATE 로직
+    function generatePPT() {
+        let pptx = new PptxGenJS();
+        let slide = pptx.addSlide();
+        const content = document.getElementById('document-input').value;
+
+        if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
+            alert("Please enter the content to generate PPT!");
+            return;
+        }
+
+        // 슬라이드 구성
+        slide.addText("AiNoteX Pro Document Result", { x: 0.5, y: 0.5, fontSize: 20, color: "363636", bold: true });
+        slide.addText(content, { x: 0.5, y: 1.5, fontSize: 14, color: "666666", w: "90%" });
+        
+        // 파일 저장
+        pptx.writeFile({ fileName: "AiNoteX_Pro_Presentation.pptx" });
+    }
+async function exportToPDF() {
+    // 1. 입력창(textarea)에 있는 텍스트 그대로 가져오기
+    const content = document.getElementById('document-input').value;
+    if(!content) { alert("지금은 업데이트 중입니다!"); return; }
+
+    // 2. 오직 입력된 내용만 담는 깨끗한 도화지 생성
+    const canvasArea = document.createElement('div');
+    canvasArea.style.width = '750px'; // 여백 확보를 위해 살짝 넓게 설정
+    canvasArea.style.padding = '60px'; // 상하좌우 정갈한 여백
+    canvasArea.style.backgroundColor = '#ffffff';
+    canvasArea.style.fontFamily = "'Noto Sans KR', sans-serif";
+    canvasArea.style.fontSize = '17px';
+    canvasArea.style.lineHeight = '1.8';
+    canvasArea.style.whiteSpace = 'pre-wrap'; // 줄바꿈, 공백 100% 유지
+    canvasArea.style.color = '#000000';
+    canvasArea.innerText = content; // 사용자가 입력한 텍스트만 주입
+    document.body.appendChild(canvasArea);
+
+    try {
+        // 3. 렌더링 후 캡처
+        await new Promise(resolve => setTimeout(resolve, 300));
+        const canvas = await html2canvas(canvasArea, { 
+            scale: 2,
+            useCORS: true,
+            height: canvasArea.scrollHeight + 100 // 아래쪽 짤림 방지용 여유
+        });
+        
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const imgWidth = 210;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // 용지 크기를 내용 높이에 맞춰 생성
+        const doc = new jsPDF('p', 'mm', [imgWidth, imgHeight]); 
+        doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        doc.save("_Original.pdf");
+
+        
+    } catch (error) {
+        alert("PDF 생성 업데이트 중입니다.");
+    } finally {
+        document.body.removeChild(canvasArea);
+    }
+}
+
+</script>
 
 <style>
     /* 1/4 크기로 줄인 마이크로 버튼 그리드 */
@@ -121,6 +239,16 @@
         color: #666;
         font-weight: 700;
     }
+
+
+// 1. 이 코드를 복사해서 doc.save 부분을 완전히 덮어쓰세요.
+const timestamp = new Date().getTime(); // 겹치지 않게 타임스탬프 생성
+const finalName = "AiNoteX_Doc_" + timestamp + ".pdf";
+
+console.log("저장될 파일명:", finalName); // 개발자 도구에서 확인용
+doc.save(finalName);
+
+
 </style>
 
 <div class="mini-utility-bar">
