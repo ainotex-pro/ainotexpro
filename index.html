@@ -3,109 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Gemini Search</title>
+    <title>AiNoteX Pro | Google Gemini Hub</title>
+
+    <meta name="description" content="Google Gemini Search. AI NOTEX PRO PLATFORM [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/icon-48.png">
+    <link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
     
+    <link rel="manifest" href="manifest.json">
 
-<link rel="icon" href="favicon.png" type="image/png">
-
-<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
-
-<link rel="icon" type="image/png" sizes="48x48" href="icons/icon-48.png">
-
-<link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
-
-<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
-
-<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
-
-
-
-    <meta name="description" content="Google Gemini Search. AI NOTEX PRO PLATFORM [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ] "현재와 미래의 모든 길은 구글로 통한다 - 정승철" : .">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --main-blue: #4285F4; --google-red: #EA4335; --google-yellow: #FBBC05; --google-green: #34A853; --gemini-purple: #8E75FF; }
-        body { margin: 0; font-family: 'Noto Sans KR', sans-serif; background: #fff url('images/hello-bg-1.webp') no-repeat center center fixed; background-size: cover; color: #333; }
+        /* 1. 기본 비즈니스 레이아웃 */
+        body { background: #f8f9fa; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
         
-        .overlay { background: rgba(255, 255, 255, 0.88); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 25px 20px; box-sizing: border-box; }
-        
-        /* 헤더 섹션 */
-        .header { text-align: center; margin-bottom: 25px; }
-        .brand { font-family: 'Libre Baskerville', serif; font-size: 23px; font-weight: 900; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
-        
-        /* 기능 소개 섹션 */
-        .features { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 12px; }
-        .feature-card { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--gemini-purple); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .feature-card h3 { font-size: 19px; margin-bottom: 10px; color: #222; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .feature-card p { font-size: 14px; line-height: 1.6; color: #555; margin: 4px 0; }
-        .eng-text { font-style: italic; color: #888; font-size: 13px; margin-top: 5px; }
+        .header-box { background: white; border: 1.5px solid; border-image: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335) 1; padding: 15px; width: 100%; max-width: 700px; text-align: center; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .google-text { color: #4285F4; font-weight: 800; font-size: 20px; }
+        .ainotex-text { color: #34A853; font-weight: 800; font-size: 20px; }
 
-        /* 버튼 간격 조정: margin-top을 40px -> 20px로 축소 */
-        .btn-start { margin-top: 20px; padding: 16px 50px; font-size: 19px; font-weight: 800; color: #fff; background: linear-gradient(45deg, var(--main-blue), var(--gemini-purple)); border-radius: 40px; text-decoration: none; box-shadow: 0 8px 20px rgba(142, 117, 255, 0.3); transition: 0.3s; display: inline-block; }
-        .btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(142, 117, 255, 0.4); }
+        .search-container { width: 100%; max-width: 600px; display: flex; background: white; border-radius: 30px; padding: 5px 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .search-container input { flex: 1; border: none; outline: none; padding: 12px; font-size: 16px; }
+        .search-btn { background: #4285F4; color: white; border: none; padding: 8px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
-        /* 푸터 간격 조정: margin-top: auto 대신 수치 부여 */
-        .motto-footer { margin-top: 25px; text-align: center; font-weight: 500; color: #555; }
+        /* 2. PC/모바일 반응형 그리드 */
+        .square-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 모바일 기본: 2열 정렬 */
+            gap: 15px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-bottom: 25px; 
+        }
+
+        /* PC 화면 반응형 (768px 이상일 때) */
+        @media(min-width: 768px) {
+            .square-grid { 
+                grid-template-columns: repeat(4, 1fr); /* PC에서는 4열로 확장 */
+                gap: 20px;
+            }
+        }
+
+        .sq-btn { background: white; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; border-radius: 15px; border: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; }
+        .sq-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .sq-btn img { width: 35px; margin-bottom: 10px; }
+        .sq-btn span { font-size: 13px; color: #333; font-weight: 600; }
+
+        /* 3. 태그 버튼 섹션 */
+        .tag-container { text-align: center; max-width: 600px; margin-bottom: 20px; }
+        .tag-btn { background: #e9ecef; color: #495057; border: none; padding: 10px 18px; border-radius: 25px; font-weight: 600; font-size: 13px; cursor: pointer; margin: 5px; }
+
+        /* 4. 내부 결과 출력 섹션 */
+        #search-result-area { display: none; width: 100%; max-width: 850px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 25px; border: 1px solid #e0e0e0; }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 12px; }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="header">
 
-            <h3 class="brand">Google Gemini Search</h3>
-            <p style="letter-spacing: 2px; font-weight: 700; color: #888; font-size: 12px; margin-top: 5px;">AI NOTEX PRO PLATFORM</p>
+    <div class="header-box">
+        <div class="header-content">
+            <span class="google-text">Google Gemini Search</span> | <span class="ainotex-text">Ai NoteX Pro</span>
         </div>
-
-        <div class="features">
-            <div class="feature-card">
-                <h3> AI-Powered Search</h3>
-                <p>Google Search / Google Gemini .</p>
-               
-            </div>
-        </div>
-        
-<a href="main.html" target="_blank"  
-   onmouseover="this.style.boxShadow='0 0 25px rgba(255, 223, 0, 0.6), 0 8px 20px rgba(0,0,0,0.15)'; this.style.transform='translateY(-3px)';"  
-   onmouseout="this.style.boxShadow='0 0 10px rgba(255,215,0,0.4)'; this.style.transform='translateY(0)';"
-   style="display: flex; align-items: center; justify-content: center; width: 90%; max-width: 500px; height: 38px; margin: 12px auto; padding: 0 20px; 
-          background: linear-gradient(90deg, #fff9c4 0%, #dcedc8 30%, #b3e5fc 70%, #f1f8e9 100%);
-          border: 2px solid #D4AF37; 
-          border-radius: 24px; 
-          color: #2c3e50 !important; 
-          font-family: 'Roboto', sans-serif; 
-          font-size: 15px; 
-          font-weight: 700; 
-          text-decoration: none; 
-          transition: all 0.4s ease; 
-          box-shadow: 0 0 10px rgba(255,215,0,0.4); 
-          cursor: pointer; 
-          box-sizing: border-box;">
-
-    <span style="flex-grow: 1; text-align: center;">Google Gemini Search</span>
-        
-</a>
-
-        <div class="motto-footer">               
-            <div style="font-size: 13px; font-weight: 900; color: var(--gemini-purple); letter-spacing: 1px; margin-bottom: 13px;">AI NOTEX PRO</div>
-        
-<div style="text-align: center;">
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.8rem; color: #525151;">
-    [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
-
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.8rem; color: #525151;">
-    "현재와 미래의 모든 길은 구글로 통한다 - 정승철"
-</p>
-
-<hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px auto; width: 95%;">
-<p style="font-size: 0.9rem; color: #525151;">
-    [ "All roads, present and future, lead to Google." ]<br>
-Jeong Seung-cheol
-</p></div>
-
-
-</p></div>
     </div>
+
+
+
+    <div class="search-container">
+        <input type="text" id="geminiSearch" placeholder="검색어나 키워드를 입력하세요">
+        <button onclick="executeSearch()" class="search-btn">검색</button>
+    </div>
+
+<style>
+    /* 1/4 크기로 줄인 마이크로 버튼 그리드 */
+    .mini-utility-bar {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto 20px auto;
+    }
+
+    .mini-sq-btn {
+        flex: 1; /* 4개가 공평하게 공간 나눠 갖기 */
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #eee;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 0; /* 높이를 확 줄임 */
+        text-decoration: none;
+        transition: 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .mini-sq-btn:hover {
+        background: #fff;
+        transform: translateY(-2px);
+    }
+
+    /* 아이콘 크기를 기존의 1/4 수준(약 18~20px)으로 조절 */
+    .mini-sq-btn img {
+        width: 20px; 
+        height: 20px;
+        margin-bottom: 3px;
+    }
+
+    /* 텍스트도 아주 작고 깔끔하게 */
+    .mini-sq-btn span {
+        font-size: 10px;
+        color: #666;
+        font-weight: 700;
+    }
+</style>
+
+<div class="mini-utility-bar">
+    <a href="https://mail.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg">
+        <span>메일</span>
+    </a>
+    <a href="https://calendar.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg">
+        <span>달력</span>
+    </a>
+    <a href="https://drive.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg">
+        <span>드라이브</span>
+    </a>
+    <a href="https://docs.google.com" target="_blank" class="mini-sq-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Google_Docs_logo_%282014-2020%29.svg">
+        <span>구글문서</span>
+    </a>
+</div>
+
+******************************************************************
+<div class="mini-utility-bar">
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+</div>
+******************************************************************
+<div class="mini-utility-bar">
+    <a href="https://translate.google.com/?sl=en&tl=ko&op=translate" target="_blank" class="mini-sq-btn"><span><svg viewBox="0 0 24 24" width="15" height="15" style="margin-right: 12px;">
+        <path fill="#4285F4" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path>
+    </svg>구글 번역</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>업데이트 중</span></a>
+    <a href="javascript:void(0);" class="mini-sq-btn"><span>🖼️ CANVAS</span></a>
+    <a href="piano.html" target="_blank" class="mini-sq-btn"><span>🎹 PIANO</span></a>
+
+</div>
+
+
+
+
+
+    <div id="search-result-area">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <strong style="color:#4285F4;">🔍 검색 결과</strong>
+            <button onclick="closeResult()" style="cursor:pointer; border:none; background:#f8f9fa; border-radius:8px; padding:5px 15px; font-size:13px; font-weight:bold;">닫기</button>
+        </div>
+        <iframe id="search-iframe"></iframe>
+    </div>
+
+    <script>
+        function fillSearch(k) { document.getElementById('geminiSearch').value = k; executeSearch(); }
+        function closeResult() { document.getElementById('search-result-area').style.display = 'none'; }
+        
+        function executeSearch() {
+            const q = document.getElementById('geminiSearch').value;
+            const area = document.getElementById('search-result-area');
+            const ifr = document.getElementById('search-iframe');
+            if(q.trim() !== "") {
+                area.style.display = "block";
+                ifr.src = "https://www.google.com/search?q=" + encodeURIComponent(q) + "&igu=1";
+                area.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+    
+
+<style>
+    /* 태그를 훨씬 작고 방해되지 않게 만드는 스타일 */
+    .mini-tag {
+        background: none;
+        border: none;
+        color: #4285F4;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-right: 5px;
+        padding: 2px 5px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+    .mini-tag:hover {
+        background: #e3f2fd;
+        text-decoration: underline;
+    }
+</style>
+
+<hr style="border: 0; border-top: 1px solid #eee; width: 50%; margin: 10px auto;">
+    
+    <p style="font-size: 10px; color: #888; letter-spacing: 1px; margin: 5px 0;">
+        [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]
+    </p>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; width: 30%; margin: 10px auto;">
+    
+    <p style="font-size: 12px; color: #555; font-weight: 500; margin: 8px 0;">
+        [ "현재와 미래의 모든 길은 구글로 통한다" - 정승철 ]
+    </p>
+    
+    <hr style="border: 0; border-top: 1px solid #eee; width: 30%; margin: 10px auto;">
+    
+    <p style="font-size: 13px; color: #999; font-style: ; line-height: 1.4; margin: 5px 0;">
+        [ "All roads, present and future, lead to Google." ]<br>
+        <span style="font-style: normal; font-weight: bold; font-size: 10px;">Jeong Seung-cheol</span>
+    </p>
+
+        
+        <div style="margin-top: 20px;">
+            <p style="font-size: 11px; color: #888; line-height: 1.6;">
+                본 서비스는 구글 각 기능 바로가기 및 API 연동 허브로서,<br>
+                모든 개인정보 보호 및 데이터 처리는 <a href="https://policies.google.com/privacy?hl=ko" target="_blank" style="color: var(--google-blue);">Google 개인정보처리방침</a>에 따릅니다.
+            </p>
+
+
+        </div>
+    </div>
+
 </body>
 </html>
