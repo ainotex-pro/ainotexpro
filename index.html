@@ -104,7 +104,7 @@
 </svg>
 
 
-    <span style="flex-grow: 1; text-align: center;">Google  Searchi 검색 바로가기</span>
+    <span style="flex-grow: 1; text-align: center;">Google  Searchi 바로가기</span>
     
     <span style="color: #666; font-size: 16px; font-weight: bold;">➔</span>
 </a>
@@ -150,8 +150,11 @@
 
 <div id="workspace-container" style="max-width: 800px; margin: 30px auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; width: 100%; box-sizing: border-box;">
     
+<input type="text" id="pdf-filename" placeholder="저장할 PDF 파일명을 입력하세요" 
+       style="width: 97%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;">
+
     <textarea id="document-input" 
-        placeholder="PASTE YOUR CONTENT HERE FOR PDF/PPT GENERATION / PDF/PPT 생성을 위해 여기에 내용을 붙여넣으세요......... 지금은 현재 업데이트 중입니다 " 
+        placeholder="PASTE YOUR CONTENT HERE FOR PDF/PPT GENERATION / PDF/PPT 생성을 위해 여기에 내용을 붙여넣으세요......... PPT 업데이트 중입니다 " 
         style="width: 100%; max-width: 800px; height: 250px; padding: 15px; border-radius: 12px; border: 2px solid #eee; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; resize: vertical; outline: none; transition: border-color 0.3s; box-sizing: border-box;"
         onfocus="this.style.borderColor='#4285F4'"
         onblur="this.style.borderColor='#eee'"></textarea>
@@ -186,86 +189,66 @@
 
 
 <script>
-    // 2. PDF EXPORT 로직
-    function exportToPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        const content = document.getElementById('document-input').value;
-
-        if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
-            alert("Please enter the content to export!");
-            return;
-        }
-
-        // PDF 생성 및 저장
-        doc.setFontSize(12);
-        // 기본 폰트는 영문 위주이며, 한글 출력을 위해서는 추후 폰트 이식이 필요할 수 있습니다.
-        doc.text(content, 10, 10, { maxWidth: 180 });
-        doc.save("AiNoteX_Pro_Document.pdf");
-    }
-
-    // 3. PPT GENERATE 로직
-    function generatePPT() {
-        let pptx = new PptxGenJS();
-        let slide = pptx.addSlide();
-        const content = document.getElementById('document-input').value;
-
-        if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
-            alert("Please enter the content to generate PPT!");
-            return;
-        }
-
-        // 슬라이드 구성
-        slide.addText("AiNoteX Pro Document Result", { x: 0.5, y: 0.5, fontSize: 20, color: "363636", bold: true });
-        slide.addText(content, { x: 0.5, y: 1.5, fontSize: 14, color: "666666", w: "90%" });
-        
-        // 파일 저장
-        pptx.writeFile({ fileName: "AiNoteX_Pro_Presentation.pptx" });
-    }
+ // 1. PDF EXPORT 로직 (최종 통합 버전)
 async function exportToPDF() {
-    // 1. 입력창(textarea)에 있는 텍스트 그대로 가져오기
+    const { jsPDF } = window.jspdf;
     const content = document.getElementById('document-input').value;
-    if(!content) { alert("지금은 업데이트 중입니다!"); return; }
+    
+    // 파일명 입력창에서 사용자가 쓴 제목 가져오기
+    const userTitle = document.getElementById('pdf-filename').value.trim();
+    // 제목이 없으면 기본값 설정
+    const finalFileName = userTitle ? userTitle : "AiNoteX_Pro_Document";
 
-    // 2. 오직 입력된 내용만 담는 깨끗한 도화지 생성
+    if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
+        alert("내용을 입력해 주세요!");
+        return;
+    }
+
+    // 렌더링용 임시 도화지 생성
     const canvasArea = document.createElement('div');
-    canvasArea.style.width = '750px'; // 여백 확보를 위해 살짝 넓게 설정
-    canvasArea.style.padding = '60px'; // 상하좌우 정갈한 여백
-    canvasArea.style.backgroundColor = '#ffffff';
-    canvasArea.style.fontFamily = "'Noto Sans KR', sans-serif";
-    canvasArea.style.fontSize = '17px';
-    canvasArea.style.lineHeight = '1.8';
-    canvasArea.style.whiteSpace = 'pre-wrap'; // 줄바꿈, 공백 100% 유지
-    canvasArea.style.color = '#000000';
-    canvasArea.innerText = content; // 사용자가 입력한 텍스트만 주입
+    canvasArea.style = "width:750px; padding:60px; background:#fff; font-family:'Noto Sans KR', sans-serif; font-size:17px; line-height:1.8; white-space:pre-wrap; color:#000; position:absolute; left:-9999px;";
+    canvasArea.innerText = content;
     document.body.appendChild(canvasArea);
 
     try {
-        // 3. 렌더링 후 캡처
-        await new Promise(resolve => setTimeout(resolve, 300));
-        const canvas = await html2canvas(canvasArea, { 
-            scale: 2,
-            useCORS: true,
-            height: canvasArea.scrollHeight + 100 // 아래쪽 짤림 방지용 여유
-        });
-        
+        const canvas = await html2canvas(canvasArea, { scale: 2 });
         const imgData = canvas.toDataURL('image/png');
-        const { jsPDF } = window.jspdf;
         const imgWidth = 210;
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        // 용지 크기를 내용 높이에 맞춰 생성
         const doc = new jsPDF('p', 'mm', [imgWidth, imgHeight]); 
         doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-        doc.save("제목을수정하세여_Original.pdf");
-
         
+        // [사령관님의 핵심 요청] 사용자가 입력한 제목으로 저장!
+        doc.save(finalFileName + ".pdf");
+
     } catch (error) {
-        alert("PDF 생성 업데이트 중입니다.");
+        alert("PDF 생성 중 오류가 발생했습니다.");
     } finally {
         document.body.removeChild(canvasArea);
     }
 }
+
+// 2. PPT GENERATE 로직 (기존 유지)
+function generatePPT() {
+    // PPT 라이브러리(PptxGenJS)가 연결되어 있어야 작동합니다.
+    if (typeof PptxGenJS === "undefined") {
+        alert("PPT 라이브러리가 로드되지 않았습니다.");
+        return;
+    }
+    let pptx = new PptxGenJS();
+    let slide = pptx.addSlide();
+    const content = document.getElementById('document-input').value;
+
+    if(!content || content.includes("여기는 현재 업데이트 중입니다")) {
+        alert("내용을 입력해 주세요!");
+        return;
+    }
+
+    slide.addText("AiNoteX Pro Document Result", { x: 0.5, y: 0.5, fontSize: 20, bold: true });
+    slide.addText(content, { x: 0.5, y: 1.5, fontSize: 14, w: "90%" });
+    pptx.writeFile({ fileName: "AiNoteX_Pro_Presentation.pptx" });
+}   
 
 </script>
 
