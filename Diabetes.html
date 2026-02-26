@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai NoteX Pro V2 | 당뇨 수첩 엔진</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; text-align: center; }
+        .card { background: white; width: 95%; max-width: 500px; margin: auto; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chart { display: flex; justify-content: space-around; align-items: flex-end; height: 180px; border-bottom: 2px solid #ddd; padding-bottom: 30px; margin-bottom: 30px; }
+        .bar { width: 30px; height: 10px; border-radius: 5px 5px 0 0; position: relative; transition: all 0.3s; background: #bdc3c7; }
+        .bar span { position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 11px; white-space: nowrap; }
+        .safe { background: #2ecc71 !important; }
+        .warn { background: #f1c40f !important; }
+        .danger { background: #e74c3c !important; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .input-box { background: #f9f9f9; padding: 10px; border-radius: 10px; }
+        input { width: 80%; border: 1px solid #ccc; text-align: center; font-size: 16px; padding: 5px; border-radius: 5px; }
+        label { display: block; font-size: 11px; color: #666; margin-bottom: 5px; }
+        #save-btn { background: #2c3e50; color: white; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color:#2c3e50; margin-bottom:5px;">Diabetes_notebook | 당뇨 노트</h2>
+    <p style="font-size:12px; color:#7f8c8d; margin-top:0;">AI NOTEX PRO (GCP Cloud Connected)</p>
+
+    <div class="chart">
+        <div id="b1" class="bar"><span>공복</span></div>
+        <div id="b2" class="bar"><span>아침후</span></div>
+        <div id="b3" class="bar"><span>점심전</span></div>
+        <div id="b4" class="bar"><span>점심후</span></div>
+        <div id="b5" class="bar"><span>저녁전</span></div>
+        <div id="b6" class="bar"><span>저녁후</span></div>
+        <div id="b7" class="bar"><span>취침전</span></div>
+        <div id="b8" class="bar"><span>기타</span></div>
+    </div>
+
+    <div style="margin-bottom: 20px; background:#ebf0f1; padding:10px; border-radius:10px;">
+        <label style="font-size: 13px; font-weight: bold; display:inline;">📅 기록 날짜: </label>
+        <input type="date" id="targetDate" onchange="loadDailyData()" style="width:auto; border:none; background:transparent; font-weight:bold;">
+    </div>
+
+    <div class="input-grid">
+        <div class="input-box"><label>1. 공복</label><input type="number" oninput="updateBar(1, this.value)"></div>
+        <div class="input-box"><label>2. 아침후</label><input type="number" oninput="updateBar(2, this.value)"></div>
+        <div class="input-box"><label>3. 점심전</label><input type="number" oninput="updateBar(3, this.value)"></div>
+        <div class="input-box"><label>4. 점심후</label><input type="number" oninput="updateBar(4, this.value)"></div>
+        <div class="input-box"><label>5. 저녁전</label><input type="number" oninput="updateBar(5, this.value)"></div>
+        <div class="input-box"><label>6. 저녁후</label><input type="number" oninput="updateBar(6, this.value)"></div>
+        <div class="input-box"><label>7. 취침전</label><input type="number" oninput="updateBar(7, this.value)"></div>
+        <div class="input-box"><label>8. 기타</label><input type="number" oninput="updateBar(8, this.value)"></div>
+    </div>
+
+    <button id="save-btn" onclick="saveDailyData()">💾 로컬 & 클라우드 동시 저장</button>
+
+    <div id="stats-panel" style="margin-top: 25px; padding: 15px; background: #fff; border-radius: 15px; border:1px solid #eee; text-align: left;">
+        <h3 style="font-size: 15px; color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block; margin-top:0;">📈 핵심 통계 분석</h3>
+        <div style="display: flex; justify-content: space-around; margin-top: 10px;">
+            <div style="text-align: center;"><div style="font-size: 10px;">7일 평균</div><div id="weekAvg" style="font-weight: bold; color: #2ecc71;">0</div></div>
+            <div style="text-align: center;"><div style="font-size: 10px;">30일 평균</div><div id="monthAvg" style="font-weight: bold; color: #3498db;">0</div></div>
+            <div style="text-align: center;"><div style="font-size: 10px;">위험 횟수</div><div id="dangerCount" style="font-weight: bold; color: #e74c3c;">0</div></div>
+        </div>
+    </div>
+</div>
+        <a href="index.html" class="back-btn">메인으로 돌아가기</a>
+<script>
+    //  앱스 스크립트 URL을 정확히 넣으세요!
+    const GOOGLE_SCRIPT_URL = '여기에_복사한_주소를_넣으세요';
+
+    function getHistory() { return JSON.parse(localStorage.getItem('diabetes_v2_logs')) || {}; }
+
+    function updateBar(id, val) {
+        const bar = document.getElementById('b' + id);
+        if(!bar) return;
+        if(!val || val <= 0) { bar.style.height = '10px'; bar.className = 'bar'; return; }
+        let height = (val / 250) * 100;
+        bar.style.height = (height > 100 ? 100 : height) + '%';
+        bar.className = 'bar';
+        if(val <= 120) bar.classList.add('safe');
+        else if(val <= 180) bar.classList.add('warn');
+        else bar.classList.add('danger');
+    }
+
+    async function saveToGoogleSheet(date, readings) {
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', 
+                body: JSON.stringify({ date: date, readings: readings })
+            });
+        } catch (e) { console.error("Cloud Error", e); }
+    }
+
+    function saveDailyData() {
+        const date = document.getElementById('targetDate').value;
+        const readings = [];
+        for(let i=1; i<=8; i++) {
+            readings.push(document.querySelector(`.input-box:nth-child(${i}) input`).value || "");
+        }
+        const history = getHistory();
+        history[date] = readings;
+        localStorage.setItem('diabetes_v2_logs', JSON.stringify(history));
+        
+        saveToGoogleSheet(date, readings);
+        alert(date + " 데이터 동기화 완료!");
+        updateStats();
+    }
+
+    function loadDailyData() {
+        const date = document.getElementById('targetDate').value;
+        const history = getHistory();
+        for(let i=1; i<=8; i++) {
+            document.querySelector(`.input-box:nth-child(${i}) input`).value = history[date] ? history[date][i-1] : "";
+            updateBar(i, history[date] ? history[date][i-1] : 0);
+        }
+    }
+
+    function updateStats() {
+        const history = getHistory();
+        const now = new Date();
+        let weekSum = 0, weekCount = 0, monthSum = 0, monthCount = 0, dangerCount = 0;
+        for (let d in history) {
+            const diff = Math.ceil(Math.abs(now - new Date(d)) / (1000*60*60*24));
+            history[d].filter(v => v !== "").forEach(val => {
+                val = Number(val);
+                if (diff <= 30) { monthSum += val; monthCount++; }
+                if (diff <= 7) { weekSum += val; weekCount++; }
+                if (val >= 180) dangerCount++;
+            });
+        }
+        document.getElementById('weekAvg').innerText = weekCount ? Math.round(weekSum / weekCount) : 0;
+        document.getElementById('monthAvg').innerText = monthCount ? Math.round(monthSum / monthCount) : 0;
+        document.getElementById('dangerCount').innerText = dangerCount;
+    }
+
+    window.onload = function() {
+        document.getElementById('targetDate').value = new Date().toISOString().substring(0, 10);
+        loadDailyData();
+        updateStats();
+    };
+</script>
+
+
+    </footer>
+</div>
+    </div>
+</body>
+</body>
+</html>
