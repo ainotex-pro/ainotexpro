@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiNoteX Pro | Google Gemini Hub</title>
+
+    <meta name="description" content="Google Gemini Search. AI NOTEX PRO PLATFORM [ A COLLABORATION BY Ai NoteX Pro & GOOGLE GEMINI ]">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/icon-48.png">
+    <link rel="icon" type="image/png" sizes="40x40" href="icons/google.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+    
+    <link rel="manifest" href="manifest.json">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    /* 사령관님의 PWA 앱에서 외부 링크를 열 때 브라우저가 글자를 키우도록 유도 */
+    body {
+        -webkit-text-size-adjust: none; /* 시스템이 마음대로 조절 못하게 방어 */
+        touch-action: manipulation;
+    }
+    
+    /* 모바일에서 버튼이 더 잘 보이도록 너비 조정 */
+    .gutenberg-link {
+        width: 95% !important; 
+        max-width: 500px;
+        margin: 10px auto;
+    }
+
+async function readBook(bookId) {
+    const contentArea = document.getElementById('readerContent');
+    const readerView = document.getElementById('readerView');
+    
+    contentArea.innerHTML = "책을 불러오는 중입니다. 잠시만 기다려 주십시오...";
+    readerView.style.display = 'block';
+
+    try {
+        // 구텐베르크의 순수 텍스트(UTF-8) 주소 사용
+        const url = `https://www.gutenberg.org/files/${bookId}/${bookId}-0.txt`;
+        const response = await fetch(url);
+        const text = await response.text();
+        
+        // 줄바꿈을 HTML 태그로 변환하여 가독성 확보
+        contentArea.innerText = text; 
+    } catch (error) {
+        contentArea.innerHTML = "오류가 발생했습니다. 직접 링크로 읽어주세요. <br><a href='https://www.gutenberg.org/ebooks/" + bookId + "'>구텐베르크 이동</a>";
+    }
+}
+
+function closeReader() {
+    document.getElementById('readerView').style.display = 'none';
+}
+</style>
+
+    <style>
+        /* 1. 기본 비즈니스 레이아웃 */
+        body { background: #f8f9fa; font-family: 'Pretendard', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+        
+        .header-box { background: white; border: 1.5px solid; border-image: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335) 1; padding: 15px; width: 100%; max-width: 700px; text-align: center; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .google-text { color: #4285F4; font-weight: 800; font-size: 17px; }
+        .ainotex-text { color: #34A853; font-weight: 800; font-size: 17px; }
+
+        .search-container { width: 100%; max-width: 600px; display: flex; background: white; border-radius: 30px; padding: 5px 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .search-container input { flex: 1; border: none; outline: none; padding: 12px; font-size: 16px; }
+        .search-btn { background: #4285F4; color: white; border: none; padding: 8px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+
+        /* 2. PC/모바일 반응형 그리드 */
+        .square-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 모바일 기본: 2열 정렬 */
+            gap: 15px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-bottom: 25px; 
+        }
+
+        /* PC 화면 반응형 (768px 이상일 때) */
+        @media(min-width: 768px) {
+            .square-grid { 
+                grid-template-columns: repeat(4, 1fr); /* PC에서는 4열로 확장 */
+                gap: 20px;
+            }
+        }
+
+/* 이 CSS를 <style> 태그 안에 넣어보십시오 */
+.gutenberg-link {
+    display: flex;
+    align-items: center;
+    width: 95% !important; /* 모바일에서 꽉 차게 */
+    max-width: 600px;      /* PC에서는 적당하게 */
+    height: auto !important; /* 높이를 고정(34px)하지 말고 유동적으로 */
+    min-height: 44px;      /* 손가락 터치하기 좋게 */
+    margin: 15px auto;
+    padding: 10px 20px !important;
+    font-size: 16px !important; /* 글자 크기 상향 */
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+/* 모바일 전용 미디어 쿼리 */
+@media screen and (max-width: 480px) {
+    .gutenberg-link span {
+        font-size: 15px !important; /* 모바일에서 글자가 잘 보이게 */
+    }
+}
+
+
+        .sq-btn { background: white; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; border-radius: 15px; border: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; }
+        .sq-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .sq-btn img { width: 35px; margin-bottom: 10px; }
+        .sq-btn span { font-size: 13px; color: #333; font-weight: 600; }
+
+        /* 3. 태그 버튼 섹션 */
+        .tag-container { text-align: center; max-width: 600px; margin-bottom: 20px; }
+        .tag-btn { background: #e9ecef; color: #495057; border: none; padding: 10px 18px; border-radius: 25px; font-weight: 600; font-size: 13px; cursor: pointer; margin: 5px; }
+
+        /* 4. 내부 결과 출력 섹션 */
+        #search-result-area { display: none; width: 100%; max-width: 850px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 25px; border: 1px solid #e0e0e0; }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 12px; }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <div class="header-content">
+            <span class="google-text">Project Gutenberg: Free eBooks</span> | <span class="ainotex-text">구텐 베르크 무료 전자책</span>
+
+        </div>
+
+    </div>
+
+
+
+<div id="beta-notice" style="background: linear-gradient(135deg, #4285F4 0%, #34A853 100%); color: white; padding: 12px; text-align: center; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.2);">
+    <div style="font-weight: 900; font-size: 12px; letter-spacing: 1px;">
+        FREE ACCESS | BETA TEST PERIOD
+    </div>
+    <div style="font-size: 12px; margin-top: 4px; opacity: 0.9;">
+        현재 <strong>베타 테스트 기간</strong>으로 모든 기능을 제한 없이 <strong>무료</strong>로 이용하실 수 있습니다.
+<br>( 정식 서비스 출시 예정일: 2026년 8월~9월 ) <br>본 서비스는 AI 기능이 탑재되지 않은 서비스입니다<br>
+<br>Currently in beta testing, all features are available free of charge, without any restrictions.
+<br>(Planned official launch date: August-September 2026)
+<br>This service does not include AI functionality.
+
+
+
+    </div>
+</div>
+
+    <div style="display: flex; gap: 10px; margin-top: 15px; width: 100%; max-width: 750px;">
+        <button onclick="exportToPDF()" style="flex: 1; padding: 12px; background: #cfa484; color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px; letter-spacing: 1px; transition: 0.3s;">
+            Project Gutenberg Free eBooks - List
+        </button></div>
+
+<div id="readerView" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#f4f1ea; z-index:10000; overflow-y:auto; padding:20px; box-sizing:border-box;">
+    <button onclick="closeReader()" style="position:fixed; top:10px; right:10px; padding:10px; background:#cfa484; color:#fff; border:none; border-radius:5px;">닫기</button>
+    <div id="readerContent" style="font-size:18px; line-height:1.8; color:#333; max-width:600px; margin:40px auto; font-family: 'serif';">
+        </div>
+</div>
+
+
+
+<a href="https://www.gutenberg.org/ebooks/2701.html.images" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">1 - 모비딕  Moby Dick<span>
+
+</a>
+
+
+
+
+<a href="https://www.gutenberg.org/cache/epub/1513/pg1513-images.html" 
+   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" 
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 5px rgba(0,0,0,0.1)';"
+   style="display: flex; align-items: center; width: 90%; max-width: 500px; height: 34px; margin: 12px auto; padding: 0 20px; background-color: #ffffff; border: 1px solid #dfe1e5; border-radius: 24px; color: #000000 !important; font-family: 'Roboto', sans-serif; font-size: 14.5px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; box-sizing: border-box;">
+    
+
+    <span style="flex-grow: 1; text-align: left;">2 - 로미오와 줄리엣 Romeo and Juliet</span>
+
+</a>
+-----------------------------------------------
+
+        <a href="index.html" style="color: #666; text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s;">
+            메인 페이지로 이동
+        </a>
+    </div>
+</div>
+
+
+</a>
+
+        </div>
+    </div>
+
+</body>
+</html>                                                                                                                                                                      
