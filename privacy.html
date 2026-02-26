@@ -2,44 +2,54 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>개인정보처리방침 - AiNoteX Pro</title>
     <style>
-        body { background: #f4f7f6; font-family: 'Noto Sans KR', sans-serif; padding: 40px; }
-        .doc-container { max-width: 950px; margin: 0 auto; background: #fff; padding: 70px; border-radius: 10px; border: 1px solid #dcdde1; }
-        h1 { font-size: 28px; color: #27ae60; text-align: center; border-bottom: 2px solid #27ae60; padding-bottom: 20px; }
-        h2 { font-size: 19px; color: #2d3436; margin-top: 40px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .ai-policy { background: #e8f5e9; padding: 20px; border-radius: 5px; font-weight: 500; }
+        body { background: #f4f7f6; font-family: 'Noto Sans KR', sans-serif; padding: 20px; line-height: 1.6; }
+        .doc-container { max-width: 850px; margin: 0 auto; background: #fff; padding: 50px; border-radius: 12px; border: 1px solid #dcdde1; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { font-size: 26px; color: #27ae60; text-align: center; border-bottom: 2px solid #27ae60; padding-bottom: 20px; margin-bottom: 40px; }
+        h2 { font-size: 18px; color: #2d3436; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        p, li { font-size: 15px; color: #4a4a4a; margin-bottom: 15px; }
+        .highlight-box { background: #e8f5e9; padding: 20px; border-radius: 8px; font-weight: 500; border-left: 5px solid #27ae60; margin: 20px 0; }
+        .back-btn { display: inline-block; margin-top: 40px; padding: 10px 25px; background: #27ae60; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s; }
+        .back-btn:hover { background: #219150; }
+        @media (max-width: 600px) { .doc-container { padding: 30px; } h1 { font-size: 22px; } }
     </style>
 </head>
 <body>
 <div class="doc-container">
-[ Google Gemini Search & Ai NoteX Pro 개인정보 처리방침 ] <br><br>
-제1조 (개인정보 미수집 원칙)<br>
-서비스 정체성 : 본 서비스는 회원가입 및 로그인 절차가 존재하지 않는 개방형 플랫폼입니다.<br>
-미수집 선언 : 본 서비스는 이용자의 개인정보를 어떠한 형태로도 수집, 저장, 보유하지 않습니다. <br>
-사용자가 입력하는 모든 텍스트 및 데이터는 본 서비스의 서버로 전송되지 않으며, 오직 이용자의 기기(Local) 내에서만 처리됩니다.<br><br>
+    <h1>AiNoteX Pro 개인정보처리방침</h1>
 
-제2조 (구글 서비스 연동 허브 및 데이터 처리)<br>
-연동 허브 역할 : 본 서비스는 구글의 다양한 기능(Search, Drive, Gemini AI 등)에 대한 바로가기 및 API 연동 허브로서 작동합니다.<br>
-구글 방침 준수 : 사용자가 본 플랫폼 내에서 연동된 구글 서비스를 이용할 경우, 발생하는 모든 개인정보 보호 및 데이터 처리는 **[Google 개인정보처리방침]**에 따릅니다. 본 플랫폼은 이 과정에서 발생하는 어떠한 정보도 수집하거나 기록하지 않습니다.<br><br>
+    <div class="highlight-box">
+        "본 서비스는 이용자의 자유와 프라이버시를 최우선으로 하며, 어떠한 개인정보도 서버에 저장하지 않는 'Zero-Knowledge' 원칙을 준수합니다."
+    </div>
 
-제3조 (개인정보의 파기 및 안전성)<br>
-원천 파기 : 수집하는 개인정보가 없으므로 별도의 파기 절차가 필요하지 않습니다.<br>
-안전성 확보 : 플랫폼은 이용자가 안전하게 구글 서비스에 접근할 수 있도록 최신 기술적 보호 조치를 유지하며, 외부의 불법적인 접근으로부터 허브 환경을 보호합니다.<br><br>
+    <h2>제1조 (개인정보 미수집 및 로컬 처리 원칙)</h2>
+    <p>1. <strong>서비스 정체성:</strong> 본 서비스(AiNoteX Pro)는 회원가입이나 로그인 절차가 없는 <strong>독립형 익명 플랫폼</strong>입니다.</p>
+    <p>2. <strong>미수집 선언:</strong> 운영자는 이용자의 성명, 이메일, 연락처 등 개인을 식별할 수 있는 정보를 수집, 저장, 보유하지 않습니다.</p>
+    <p>3. <strong>데이터 로컬 저장:</strong> 이용자가 서비스 내에서 작성하는 모든 노트, 텍스트 및 데이터는 운영자의 서버로 전송되지 않으며, 오직 이용자의 기기(Local Storage/IndexedDB) 내에서만 처리 및 보관됩니다.</p>
 
-제4조 (개인정보 보호책임자)<br>
-본 서비스의 투명성을 보장하고 이용자의 의견을 수렴하기 위하여 다음과 같이 보호책임자를 지정합니다.<br><br>
+    <h2>제2조 (외부 서비스 이용 및 면책)</h2>
+    <p>1. <strong>독립적 운영:</strong> 본 서비스는 특정 외부 플랫폼의 부속 서비스가 아닌 독립적인 도구입니다.</p>
+    <p>2. <strong>사용자 선택 권한:</strong> 이용자가 서비스 내 기능을 통해 외부 콘텐츠(AI 서비스, 도서 라이브러리 등)에 접근할 경우, 해당 과정에서 발생하는 데이터 처리는 각 해당 서비스의 개인정보 정책에 따르며, 본 서비스는 이에 관여하지 않습니다.</p>
 
-성명 : 정승철 (CEO)<br>
+    <h2>제3조 (개인정보의 안전성 확보 조치)</h2>
+    <p>1. <strong>원천적 차단:</strong> 수집하는 정보 자체가 없으므로 데이터 유출 위험이 원천적으로 차단되어 있습니다.</p>
+    <p>2. <strong>기기 보안:</strong> 이용자의 기기에 저장된 데이터의 안전은 이용자의 기기 보안 설정에 의존하므로, 공용 기기 사용 시 주의를 권장합니다.</p>
 
-연락처 : ainotexpro@gmail.com<br><br>
+    <h2>제4조 (개인정보 보호책임자)</h2>
+    <p>서비스 이용 중 궁금한 사항이나 의견이 있으시면 아래의 보호책임자에게 문의해 주시기 바랍니다.</p>
+    <p style="margin-left: 20px;">
+        <strong>성명:</strong> 정승철 (CEO)<br>
+        <strong>연락처:</strong> <a href="mailto:ainotexpro@gmail.com">ainotexpro@gmail.com</a>
+    </p>
 
-제5조 (방침의 개정 및 적용)<br>
-본 개인정보 처리방침은 2026년 2월 26일부터 적용됩니다.<br> 향후 서비스 기능 추가에 따라 수집 항목이 발생할 경우, 사전에 명확히 고지하겠습니다.<br><br>
+    <h2>제5조 (방침의 개정 및 시행일)</h2>
+    <p>본 방침은 <strong>2026년 2월 26일</strong>부터 시행됩니다. 서비스 기능의 중대한 변화가 있을 경우 시행 7일 전부터 공지사항을 통해 고지하겠습니다.</p>
 
-
-<a href="index.html" class="back-btn">메인으로 돌아가기</a>
-
+    <div style="text-align: center;">
+        <a href="index.html" class="back-btn">메인으로 돌아가기</a>
+    </div>
 </div>
 </body>
 </html>
